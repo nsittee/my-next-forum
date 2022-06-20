@@ -1,16 +1,11 @@
 import type { NextPage } from 'next'
-import { MyFooter } from '../components/my-footer'
-import { MyHead } from '../components/my-head'
+import { CommonLayout } from '../layout/common-layout'
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <MyHead title="Home" />
-      <div>
-        Main page
-      </div>
-      <MyFooter />
-    </div>
+    <CommonLayout>
+      Main page
+    </CommonLayout>
   )
 }
 
