@@ -16,7 +16,10 @@ export async function getStaticPaths() {
     { params: { title: '3' } },
     { params: { title: '4' } },
   ]
-  return { paths, fallback: false }
+  return {
+    paths: paths,
+    fallback: false
+  }
 }
 export async function getStaticProps({ params }: any) {
   return {
