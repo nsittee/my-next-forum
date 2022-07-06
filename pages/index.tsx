@@ -1,13 +1,14 @@
 import type { NextPage } from 'next'
+import { IThread, SAMPLE_THREAD } from '../constant'
 import { CommonLayout } from '../layout/common-layout'
 
 const Home: NextPage = (props: any) => {
   return (
     <CommonLayout>
       {
-        (props.threadList as number[]).map((val, _) => {
-          return <div key={val}>
-            {val}
+        (props.threadList as IThread[]).map((thread, _) => {
+          return <div key={thread._id}>
+            {thread.title} --- {thread.content}
           </div>
         })
       }
@@ -17,11 +18,10 @@ const Home: NextPage = (props: any) => {
 
 export async function getServerSideProps() {
   // get all thread data for Home page
+  const availableThread = SAMPLE_THREAD
   return {
     props: {
-      threadList: [
-        0, 1, 2
-      ],
+      threadList: availableThread
     }
   }
 }
