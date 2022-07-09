@@ -10,7 +10,7 @@ const Home: NextPage = (props: any) => {
         {
           (props.threadList as IThread[]).map((thread, _) => {
             return <ol>
-              <Link href={`r/${thread._id}`} >
+              <Link href={`r/_/${thread._id}`} >
                 <a> {thread.title} --- {thread.content}</a>
               </Link>
             </ol>

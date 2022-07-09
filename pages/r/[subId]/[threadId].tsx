@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import { SAMPLE_THREAD } from '../../constant'
-import { CommonLayout } from '../../layout/common-layout'
+import { SAMPLE_THREAD } from '../../../constant'
+import { CommonLayout } from '../../../layout/common-layout'
 
 const ThreadPage: NextPage = (props: any) => {
   return (
@@ -17,7 +17,10 @@ export async function getStaticPaths() {
   // Get available path, (just the ID of URL)
   const paths = SAMPLE_THREAD.map((thread, _) => {
     return {
-      params: { threadId: thread._id }
+      params: {
+        subId: '_',
+        threadId: thread._id,
+      }
     }
   })
 
@@ -30,9 +33,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(props: any) {
   // Get the rest of the page props, the rest of the thread data
   const threadId = props.params.threadId
-  console.log(threadId)
   const thread = SAMPLE_THREAD.find(thread => thread._id === threadId)
-  console.log(thread)
   return {
     props: {
       threadId: threadId,
