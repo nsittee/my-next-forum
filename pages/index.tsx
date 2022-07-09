@@ -1,17 +1,22 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { IThread, SAMPLE_THREAD } from '../constant'
 import { CommonLayout } from '../layout/common-layout'
 
 const Home: NextPage = (props: any) => {
   return (
     <CommonLayout>
-      {
-        (props.threadList as IThread[]).map((thread, _) => {
-          return <div key={thread._id}>
-            {thread.title} --- {thread.content}
-          </div>
-        })
-      }
+      <li>
+        {
+          (props.threadList as IThread[]).map((thread, _) => {
+            return <ol>
+              <Link href={`r/${thread._id}`} >
+                <a> {thread.title} --- {thread.content}</a>
+              </Link>
+            </ol>
+          })
+        }
+      </li>
     </CommonLayout>
   )
 }
