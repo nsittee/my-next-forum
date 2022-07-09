@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { myAxios } from '../config/axios-config'
 import { CommonLayout } from '../layout/common-layout'
 import { ISub } from '../shared/model/sub.model'
-import { IThread } from '../shared/model/thread.model'
 import { IResponseEntity } from '../shared/response.model'
 
 const Home: NextPage = (props: any) => {

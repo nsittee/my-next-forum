@@ -10,15 +10,18 @@ const ThreadPage: NextPage = (props: any) => {
   const thread: IThread = props.thread
   return (
     <CommonLayout>
-      <div key={1}>{thread._id}</div>
-      <div key={2}>_id -- {thread._id}</div>
-      <div key={3}>Title -- {thread.Title}</div>
-      <div key={4}>Content -- {thread.Content}</div>
-      <div>
-        <Link href={'/'}>
-          <a>Home</a>
-        </Link>
-      </div>
+      {thread && <>
+        <div key={1}>{thread._id}</div>
+        <div key={2}>_id -- {thread._id}</div>
+        <div key={3}>Title -- {thread.Title}</div>
+        <div key={4}>Content -- {thread.Content}</div>
+        <div>
+          <Link href={'/'}>
+            <a>Home</a>
+          </Link>
+        </div>
+      </>
+      }
     </CommonLayout>
   )
 }
@@ -26,12 +29,10 @@ const ThreadPage: NextPage = (props: any) => {
 export async function getStaticPaths() {
   // Get available path, (just the ID of URL)
   const sub = await myAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
-
   // Thread without proper sub (broken data) will be ignored
   const cleanedSub = sub.data.data.SubThread?.filter(thread => thread.SubParent)
-
   const paths = cleanedSub?.map((thread) => {
-    if (!thread.SubParent) return
+    if (!thread || !thread.SubParent) return
     return {
       params: {
         subName: thread.SubParent!!.SubLongName,
@@ -41,7 +42,7 @@ export async function getStaticPaths() {
   })
   return {
     paths: paths,
-    fallback: false
+    fallback: true
   }
 }
 
@@ -53,7 +54,7 @@ export async function getStaticProps(props: any) {
     props: {
       threadId: threadId,
       thread: thread.data.data
-    }
+    },
   }
 }
 
