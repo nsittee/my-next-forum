@@ -9,7 +9,7 @@ export const SAMPLE_THREAD: IThread[] = [
   { _id: 'content_id_5', title: 'Title_5', content: 'content_content_content_content_content_content' },
 ]
 
-interface IThread {
+export interface IThread {
   _id: string
   title: string
   content: string
