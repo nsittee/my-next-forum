@@ -10,18 +10,23 @@ const ThreadPage: NextPage = (props: any) => {
   const thread: IThread = props.thread
   return (
     <CommonLayout>
-      {thread && <>
-        <div key={1}>{thread._id}</div>
-        <div key={2}>_id -- {thread._id}</div>
-        <div key={3}>Title -- {thread.Title}</div>
-        <div key={4}>Content -- {thread.Content}</div>
-        <div>
-          <Link href={'/'}>
-            <a>Home</a>
-          </Link>
-        </div>
-      </>
-      }
+      <li>
+        {thread && <>
+          <ol><div key={1}>{thread._id}</div></ol>
+          <ol><div key={2}>_id -- {thread._id}</div></ol>
+          <ol><div key={3}>Title -- {thread.Title}</div></ol>
+          <ol><div key={4}>Content -- {thread.Content}</div></ol>
+          <ol><div key={5}>CreatedDate -- {thread.CreatedDate}</div></ol>
+          <ol><div key={6}>Upvote -- {thread.Upvote}</div></ol>
+          <ol><div key={7}>Downvote -- {thread.Downvote}</div></ol>
+          <ol>
+            <button>
+              <Link href={'/'}><a>Home</a></Link>
+            </button>
+          </ol>
+        </>
+        }
+      </li>
     </CommonLayout>
   )
 }
