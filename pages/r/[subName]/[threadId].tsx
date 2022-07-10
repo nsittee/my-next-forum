@@ -47,13 +47,22 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(props: any) {
+  let thread: IThread
   // Get the rest of the page props, the rest of the thread data
-  const threadId = props.params.threadId
-  const thread = await myAxios.get<IResponseEntity<IThread>>(`/api/threads/${threadId}`)
+  try {
+    const threadId = props.params.threadId
+    const res = await myAxios.get<IResponseEntity<IThread>>(`/api/threads/${threadId}`)
+    thread = res.data.data
+  } catch {
+    // Handle non-existing page with `notFound` property
+    return {
+      notFound: true
+    }
+  }
   return {
     props: {
-      threadId: threadId,
-      thread: thread.data.data
+      threadId: thread._id,
+      thread: thread
     },
   }
 }
