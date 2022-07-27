@@ -12,6 +12,7 @@ const Home: NextPage = (props: any) => {
       <li>
         {
           sub.SubThread!!.map((thread, _) => {
+            if (!thread.SubParent?.SubLongName) return
             return <ol key={thread._id}>
               <Link href={`r/${thread.SubParent?.SubLongName}/${thread._id}`} >
                 <a> {thread._id} --- {thread.Title}</a>
