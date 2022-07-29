@@ -1,6 +1,6 @@
 import { IResponseEntity } from './../shared/response.model';
 import axios from 'axios'
-import appConstant from '../constant/app-constant'
+import { appConstant } from '../constant/app-constant';
 
 const SIGNIN_API = "/api/users/signin"
 

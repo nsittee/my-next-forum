@@ -3,9 +3,7 @@
 //   ENV: process.env.REACT_APP_ENV,
 // }
 
-const appConstant = {
-  URL: 'https://bonbon-my-forum.herokuapp.com',
-  ENV: 'dev',
+export const appConstant = {
+  URL: process.env.BACKEND_URL ? process.env.BACKEND_URL : "",
+  ENV: process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "",
 }
-
-export default appConstant;
