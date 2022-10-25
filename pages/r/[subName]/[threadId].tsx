@@ -31,7 +31,7 @@ const ThreadPage: NextPage = (props: any) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   // Get available path, (just the ID of URL)
   const sub = await myAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
   // Thread without proper sub (broken data) will be ignored
@@ -51,7 +51,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(props: any) {
+export const getStaticProps = async (props: any) => {
   let thread: IThread
   // Get the rest of the page props, the rest of the thread data
   try {
