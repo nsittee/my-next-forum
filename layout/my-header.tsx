@@ -4,24 +4,23 @@ import { selectAuthState, setAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {
   const authState = useSelector(selectAuthState)
+  const [username, setUsername] = useState<string>('')
   const dispatch = useDispatch()
 
   // const [authenticated, setAuthenticated] = useState(authState.authState)
-  const [username, setUsername] = useState<string>('')
 
   return (
     <div style={{
       backgroundColor: "gray",
     }}>
       <div style={{
-        margin: "0 50%"
+        // margin: "0 50%"
       }}>
-
         {
           !authState.authenticate ?
             <div>
               <input onChange={(e) => setUsername(e.target.value)} />
-              <button onClick={() => {
+              <button disabled={username === ''} onClick={() => {
                 // setAuthenticated(true)
                 dispatch(setAuthState({
                   authenticate: true,
@@ -33,10 +32,10 @@ export const MyHeader = (props: any) => {
             </div>
             :
             <div>
-              {username}
+              {authState.username}
               <button onClick={() => {
                 // setAuthenticated(false)
-                // setUsername('')
+                setUsername('')
                 dispatch(setAuthState({
                   authenticate: false,
                   username: ''

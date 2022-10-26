@@ -6,6 +6,8 @@ import { appConstant } from '../constant/app-constant'
 import { CommonLayout } from '../layout/common-layout'
 import { defaultSub, ISub } from '../shared/model/sub.model'
 import { IResponseEntity } from '../shared/response.model'
+import { setAuthState } from '../store/authSlice'
+import { wrapper } from '../store/store'
 
 const Home: NextPage = (props: any) => {
   const [sub, setSub] = useState<ISub>(defaultSub) // for useEffect, CSR

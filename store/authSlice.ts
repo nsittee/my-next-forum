@@ -23,6 +23,7 @@ export const authSlice = createSlice({
     // Action to set the authentication status
     setAuthState(state, action) {
       state.authenticate = action.payload.authenticate
+      state.username = action.payload.username
     },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
