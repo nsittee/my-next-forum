@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectAuthState, setAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {
-  const [authenticated, setAuthenticated] = useState(false)
+  const authState = useSelector(selectAuthState)
+  const dispatch = useDispatch()
+
+  // const [authenticated, setAuthenticated] = useState(authState.authState)
   const [username, setUsername] = useState<string>('')
 
   return (
@@ -13,11 +18,15 @@ export const MyHeader = (props: any) => {
       }}>
 
         {
-          !authenticated ?
+          !authState.authenticate ?
             <div>
               <input onChange={(e) => setUsername(e.target.value)} />
               <button onClick={() => {
-                setAuthenticated(true)
+                // setAuthenticated(true)
+                dispatch(setAuthState({
+                  authenticate: true,
+                  username: username
+                }))
               }}>
                 sign in
               </button>
@@ -26,8 +35,12 @@ export const MyHeader = (props: any) => {
             <div>
               {username}
               <button onClick={() => {
-                setAuthenticated(false)
-                setUsername('')
+                // setAuthenticated(false)
+                // setUsername('')
+                dispatch(setAuthState({
+                  authenticate: false,
+                  username: ''
+                }))
               }}>
                 sign out
               </button>
