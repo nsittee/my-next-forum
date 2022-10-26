@@ -15,10 +15,7 @@ const Home: NextPage = (props: any) => {
     (async () => {
       const subResponse = await myAxios.get<IResponseEntity<ISub>>(`${appConstant.URL}api/threads/from-sub`)
       // setSub(subResponse.data.data)
-      setSub(prevSub => {
-        console.table(prevSub)
-        return subResponse.data.data
-      })
+      setSub(subResponse.data.data)
     })()
   }, [])
 
