@@ -1,12 +1,27 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { myAxios } from '../config/axios-config'
+import { appConstant } from '../constant/app-constant'
 import { CommonLayout } from '../layout/common-layout'
-import { ISub } from '../shared/model/sub.model'
+import { defaultSub, ISub } from '../shared/model/sub.model'
 import { IResponseEntity } from '../shared/response.model'
 
 const Home: NextPage = (props: any) => {
-  const sub: ISub = props.sub
+  const [sub, setSub] = useState<ISub>(defaultSub) // for useEffect, CSR
+  // const sub: ISub = props.sub // for getServerSideProps, SSR
+
+  useEffect(() => {
+    (async () => {
+      const subResponse = await myAxios.get<IResponseEntity<ISub>>(`${appConstant.URL}api/threads/from-sub`)
+      // setSub(subResponse.data.data)
+      setSub(prevSub => {
+        console.table(prevSub)
+        return subResponse.data.data
+      })
+    })()
+  }, [])
+
   return (
     <CommonLayout>
       <li>
@@ -25,14 +40,15 @@ const Home: NextPage = (props: any) => {
   )
 }
 
-export async function getServerSideProps() {
-  // get all thread data for Home page
-  const sub = await myAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
-  return {
-    props: {
-      sub: sub.data.data
-    }
-  }
-}
+// For SSR
+// export async function getServerSideProps() {
+//   // get all thread data for Home page
+//   const sub = await myAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
+//   return {
+//     props: {
+//       sub: sub.data.data
+//     }
+//   }
+// }
 
 export default Home

@@ -4,6 +4,6 @@
 // }
 
 export const appConstant = {
-  URL: process.env.BACKEND_URL ? process.env.BACKEND_URL : "",
-  ENV: process.env.ENVIRONMENT ? process.env.ENVIRONMENT : "",
+  ENV: process.env.NEXT_PUBLIC_ENVIRONMENT,
+  URL: process.env.NEXT_PUBLIC_BACKEND_URL,
 }
