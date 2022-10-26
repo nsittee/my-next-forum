@@ -5,7 +5,9 @@ import { MyHeader } from './my-header'
 
 export const CommonLayout = (props: any) => {
   return (
-    <div>
+    <div style={{
+      backgroundColor: "lightgray"
+    }}>
       <MyHead title={props.title ? props.title : "my-forum"} />
       <MyHeader />
       {props.children}

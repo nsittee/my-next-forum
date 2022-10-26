@@ -6,7 +6,7 @@ export const MyHeader = (props: any) => {
 
   return (
     <div style={{
-      backgroundColor: "lightgreen",
+      backgroundColor: "gray",
     }}>
       <div style={{
         margin: "0 50%"
