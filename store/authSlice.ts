@@ -25,8 +25,8 @@ export const authSlice = createSlice({
       state.username = action.payload.username
     },
     resetAuthState(state) {
-      state.authenticate = false
-      state.username = ''
+      state.authenticate = initialState.authenticate
+      state.username = initialState.username
     }
   },
 })
