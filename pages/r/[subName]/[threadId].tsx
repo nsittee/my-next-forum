@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { myAxios } from '../../../config/axios-config'
-import { CommonLayout } from '../../../layout/common-layout'
 import { ISub } from '../../../shared/model/sub.model'
 import { IThread } from '../../../shared/model/thread.model'
 import { IResponseEntity } from '../../../shared/response.model'
@@ -13,7 +12,7 @@ const ThreadPage: NextPage = (props: any) => {
   const thread: IThread = props.thread
 
   return (
-    <CommonLayout>
+    <div>
       <li>
         {thread && <>
           {authState.authenticate &&
@@ -34,7 +33,7 @@ const ThreadPage: NextPage = (props: any) => {
         </>
         }
       </li>
-    </CommonLayout>
+    </div>
   )
 }
 

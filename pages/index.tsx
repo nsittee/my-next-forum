@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { myAxios } from '../config/axios-config'
 import { appConstant } from '../constant/app-constant'
-import { CommonLayout } from '../layout/common-layout'
 import { defaultSub, ISub } from '../shared/model/sub.model'
 import { IResponseEntity } from '../shared/response.model'
 import { setAuthState } from '../store/authSlice'
@@ -22,7 +21,7 @@ const Home: NextPage = (props: any) => {
   }, [])
 
   return (
-    <CommonLayout>
+    <div>
       <li>
         {
           sub.SubThread!!.map((thread, _) => {
@@ -35,7 +34,7 @@ const Home: NextPage = (props: any) => {
           })
         }
       </li>
-    </CommonLayout>
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { USERNAME_KEY } from '../constant/app-constant'
 import { selectAuthState, setAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {
@@ -21,7 +22,7 @@ export const MyHeader = (props: any) => {
             <div>
               <input onChange={(e) => setUsername(e.target.value)} />
               <button disabled={username === ''} onClick={() => {
-                // setAuthenticated(true)
+                window.localStorage.setItem(USERNAME_KEY, username)
                 dispatch(setAuthState({
                   authenticate: true,
                   username: username
@@ -34,7 +35,7 @@ export const MyHeader = (props: any) => {
             <div>
               {authState.username}
               <button onClick={() => {
-                // setAuthenticated(false)
+                window.localStorage.removeItem(USERNAME_KEY)
                 setUsername('')
                 dispatch(setAuthState({
                   authenticate: false,
