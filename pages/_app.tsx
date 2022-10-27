@@ -1,13 +1,13 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { wrapper } from '../store/store'
-import { CommonLayout } from '../layout/common-layout'
+import { MainLayout } from '../layout/main-layout'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CommonLayout>
+    <MainLayout>
       <Component {...pageProps} />
-    </CommonLayout>
+    </MainLayout>
   )
 }
 

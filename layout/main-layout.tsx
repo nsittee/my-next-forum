@@ -6,7 +6,7 @@ import { MyFooter } from './my-footer'
 import { MyHead } from './my-head'
 import { MyHeader } from './my-header'
 
-export const CommonLayout = (props: any) => {
+export const MainLayout = (props: any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
