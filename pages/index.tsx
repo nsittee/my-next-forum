@@ -1,14 +1,12 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { myAxios } from '../config/axios-config'
 import { appConstant } from '../constant/app-constant'
-import { defaultSub, ISub } from '../shared/model/sub.model'
+import { ISub } from '../shared/model/sub.model'
 import { IResponseEntity } from '../shared/response.model'
-import { setAuthState } from '../store/authSlice'
-import { selectMainFeedState, setMainFeedState } from '../store/mainFeedSlice'
-import { wrapper } from '../store/store'
+import { resetMainFeedState, selectMainFeedState, setMainFeedState } from '../store/mainFeedSlice'
 
 const Home: NextPage = (props: any) => {
   const dispatch = useDispatch()
@@ -24,12 +22,18 @@ const Home: NextPage = (props: any) => {
   }
 
   useEffect(() => {
-    fetchList()
+    (async () => {
+      const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`${appConstant.URL}api/threads/from-sub`)).data.data
+      dispatch(setMainFeedState({
+        sub: subResponse
+      }))
+    })()
   }, [])
 
   return (
     <div>
       <button onClick={() => {
+        dispatch(resetMainFeedState())
         fetchList()
       }}>
         refresh

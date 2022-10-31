@@ -16,7 +16,7 @@ const ThreadPage: NextPage = (props: any) => {
       <li>
         {thread && <>
           {authState.authenticate &&
-            <ol><div key={0}>reading as "{authState.username}" </div></ol>
+            <ol><div key={0}>reading as `{authState.username}` </div></ol>
           }
           <ol><div key={1}>{thread._id}</div></ol>
           <ol><div key={2}>_id -- {thread._id}</div></ol>

@@ -34,7 +34,7 @@ export const mainFeedSlice = createSlice({
   },
 })
 
-export const { setMainFeedState } = mainFeedSlice.actions
+export const { setMainFeedState, resetMainFeedState } = mainFeedSlice.actions
 
 export const selectMainFeedState = (state: AppState) => state.mainFeed
 
