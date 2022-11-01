@@ -20,13 +20,13 @@ const Home: NextPage = (props: any) => {
         refresh
       </button>
       {
-        mainFeedState.mainFeedStatus.loading ?
+        mainFeedState.status.isLoading ?
           <div>
             loading...
           </div>
           :
-          mainFeedState.mainFeedStatus.error ?
-            <div>something wrong: {mainFeedState.mainFeedStatus.errorMessage}</div>
+          mainFeedState.status.error ?
+            <div>something wrong: {mainFeedState.status.errorMessage}</div>
             :
             <ul>
               {

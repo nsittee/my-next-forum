@@ -13,7 +13,7 @@ const initialState = {
   subLongName: '',
   subMember: <IUser[]>[],
   threadList: <IThread[]>[],
-  mainFeedStatus: initialStatus
+  status: initialStatus
 }
 
 export type MainFeedState = Readonly<typeof initialState>;
@@ -48,9 +48,9 @@ export const mainFeedSlice = createSlice({
         state.subLongName = initialState.subLongName
         state.subMember = initialState.subMember
         state.threadList = initialState.threadList
-        state.mainFeedStatus.loading = initialState.mainFeedStatus.loading
-        state.mainFeedStatus.error = initialState.mainFeedStatus.error
-        state.mainFeedStatus.errorMessage = initialState.mainFeedStatus.errorMessage
+        state.status.isLoading = initialState.status.isLoading
+        state.status.error = initialState.status.error
+        state.status.errorMessage = initialState.status.errorMessage
       })
       .addCase(getMainFeed.fulfilled, (state, action) => {
         const sub: ISub = action.payload
@@ -58,12 +58,12 @@ export const mainFeedSlice = createSlice({
         state.subLongName = sub.SubLongName!!
         state.subMember = sub.SubUser!!
         state.threadList = sub.SubThread!!
-        state.mainFeedStatus.loading = false
+        state.status.isLoading = false
       })
       .addCase(getMainFeed.rejected, (state) => {
-        state.mainFeedStatus.loading = false
-        state.mainFeedStatus.error = true
-        state.mainFeedStatus.errorMessage = 'failed to get main feed'
+        state.status.isLoading = false
+        state.status.error = true
+        state.status.errorMessage = 'failed to get main feed'
       })
   }
 })

@@ -1,11 +1,11 @@
 export interface Status {
-  loading: boolean
+  isLoading: boolean
   error: boolean
   errorMessage: string
 }
 
 export const initialStatus: Status = {
-  loading: true,
+  isLoading: true,
   error: false,
   errorMessage: ''
 }
