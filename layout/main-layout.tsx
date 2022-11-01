@@ -13,7 +13,6 @@ export const MainLayout = (props: any) => {
     const localUsername = window.localStorage.getItem(USERNAME_KEY)
     if (localUsername == null) return
 
-    console.log(localUsername)
     dispatch(getAccount({
       username: localUsername
     }))
