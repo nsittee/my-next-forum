@@ -27,18 +27,21 @@ const Home: NextPage = (props: any) => {
             loading...
           </div>
           :
-          <li>
-            {
-              mainFeedState.threadList.map((thread, _) => {
-                if (!thread.SubParent?.SubLongName) return
-                return <ol key={thread._id}>
-                  <Link href={`r/${thread.SubParent?.SubLongName}/${thread._id}`} >
-                    <a> {thread._id} --- {thread.Title}</a>
-                  </Link>
-                </ol>
-              })
-            }
-          </li>
+          mainFeedState.mainFeedStatus.error ?
+            <div>something wrong: {mainFeedState.mainFeedStatus.errorMessage}</div>
+            :
+            <ul>
+              {
+                mainFeedState.threadList.map((thread, _) => {
+                  if (!thread.SubParent?.SubLongName) return
+                  return <li key={thread._id}>
+                    <Link href={`r/${thread.SubParent?.SubLongName}/${thread._id}`} >
+                      <a> {thread._id} --- {thread.Title}</a>
+                    </Link>
+                  </li>
+                })
+              }
+            </ul>
       }
     </div>
   )
