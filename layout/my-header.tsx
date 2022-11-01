@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { USERNAME_KEY } from '../constant/app-constant'
-import { resetAuthState, selectAuthState, setAuthState } from '../store/authSlice'
+import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {
   const authState = useSelector(selectAuthState)
   const [username, setUsername] = useState<string>('')
   const dispatch = useDispatch()
-
-  // const [authenticated, setAuthenticated] = useState(authState.authState)
 
   return (
     <div style={{
@@ -20,9 +18,9 @@ export const MyHeader = (props: any) => {
             <input onChange={(e) => setUsername(e.target.value)} />
             <button disabled={username === ''} onClick={() => {
               window.localStorage.setItem(USERNAME_KEY, username)
-              dispatch(setAuthState({
-                authenticate: true,
-                username: username
+              dispatch(authenticate({
+                username: username,
+                password: '123456'
               }))
             }}>
               sign in
