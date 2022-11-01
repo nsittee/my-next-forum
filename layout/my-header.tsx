@@ -17,7 +17,6 @@ export const MyHeader = (props: any) => {
           <div>
             <input onChange={(e) => setUsername(e.target.value)} />
             <button disabled={username === ''} onClick={() => {
-              window.localStorage.setItem(USERNAME_KEY, username)
               dispatch(authenticate({
                 username: username,
                 password: '123456'
@@ -30,7 +29,7 @@ export const MyHeader = (props: any) => {
           <div>
             {authState.username}
             <button onClick={() => {
-              window.localStorage.removeItem(USERNAME_KEY)
+              window.localStorage.removeItem('TOKEN')
               setUsername('')
               dispatch(resetAuthState())
             }}>

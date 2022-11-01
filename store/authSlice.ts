@@ -1,4 +1,7 @@
+import { TOKEN_KEY } from './../constant/app-constant';
+import jwt from 'jsonwebtoken'
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { myAxios } from "../config/axios-config"
 import { initialStatus, Status } from "./common"
 import { AppState } from "./store"
 
@@ -25,9 +28,9 @@ export const authenticate = createAsyncThunk(
       // Fake api call here
       const username = payload.username
       const password = payload.password
-      const jwtResponse: string = `${username}:${password}`
+      const response = await myAxios.post<string>('http://localhost:3000/api/account/authenticate', { username, password })
 
-      return jwtResponse
+      return response.data
     }
     catch (e) {
       return thunkAPI.rejectWithValue(e)
@@ -36,13 +39,12 @@ export const authenticate = createAsyncThunk(
 )
 export const getAccount = createAsyncThunk(
   'auth/getAccount',
-  async (payload: any, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      // Api call here, put JWT in header from axios
-      // const username: string = payload
-      // console.log(username)
-      // const response = (await myAxios.get<string>(`${appConstant.URL}api/account`)).data.data
-      return payload
+      const valid = (await myAxios.get<boolean>('http://localhost:3000/api/account')).data
+      if (!valid) return thunkAPI.rejectWithValue('signout')
+
+      return valid
     }
     catch (e) {
       return thunkAPI.rejectWithValue(e)
@@ -58,6 +60,8 @@ export const authSlice = createSlice({
     resetAuthState(state) {
       state.authenticate = initialState.authenticate
       state.username = initialState.username
+      state.token = initialState.token
+      window.localStorage.removeItem(TOKEN_KEY)
     }
   },
   extraReducers: (builder) => {
@@ -71,11 +75,16 @@ export const authSlice = createSlice({
         state.status.errorMessage = ''
       })
       .addCase(authenticate.fulfilled, (state, action) => {
-        const jwt = action.payload
+        const responseJwt = action.payload
+        const payloadJwt = jwt.decode(responseJwt) as any
+        console.log(payloadJwt)
+
         state.authenticate = true
-        state.username = action.payload  // extract from jwt
-        state.token = jwt
+        state.username = payloadJwt.username  // extract from jwt
+        state.token = responseJwt
         state.status.isLoading = false
+
+        window.localStorage.setItem(TOKEN_KEY, responseJwt)
       })
       .addCase(authenticate.rejected, (state, action) => {
         state.status.isLoading = false
@@ -91,9 +100,12 @@ export const authSlice = createSlice({
         state.status.errorMessage = ''
       })
       .addCase(getAccount.fulfilled, (state, action) => {
+        const localJwt = window.localStorage.getItem(TOKEN_KEY) as string
+        const payloadJwt = jwt.decode(localJwt) as any
+
         state.authenticate = true
-        state.username = action.payload.username
-        state.token = action.payload.username
+        state.username = payloadJwt.username
+        state.token = localJwt
         state.status.isLoading = false
         state.status.error = false
         state.status.errorMessage = ''
@@ -101,7 +113,8 @@ export const authSlice = createSlice({
       .addCase(getAccount.rejected, (state, action) => {
         state.status.isLoading = false
         state.status.error = true
-        state.status.errorMessage = 'error during authentication'
+        state.status.errorMessage = 'error during getAccount'
+        localStorage.removeItem(TOKEN_KEY)
         // then sign out
       })
   }

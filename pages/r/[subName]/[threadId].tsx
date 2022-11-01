@@ -15,14 +15,16 @@ const ThreadPage: NextPage = (props: any) => {
 
   return (
     <div>
-      {authState.authenticate &&
-        <>
-          <p>reading as `{authState.username}`</p>
-          {router.query.from === 'mainFeed' &&
-            <p>Comes from MainFeed</p>
-          }
-        </>
-      }
+      <div>
+        {authState.authenticate &&
+          <>
+            <p>reading as `{authState.username}`</p>
+          </>
+        }
+        {router.query.from === 'mainFeed' &&
+          <p>Comes from MainFeed</p>
+        }
+      </div>
       <ul>
         {thread && <>
           <li>{thread._id}</li>

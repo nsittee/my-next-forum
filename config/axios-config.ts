@@ -1,3 +1,4 @@
+import { TOKEN_KEY } from './../constant/app-constant';
 import { IResponseEntity } from './../shared/response.model';
 import axios from 'axios'
 import { appConstant } from '../constant/app-constant';
@@ -16,8 +17,8 @@ const refreshAxios = axios.create({
 
 myAxios.interceptors.request.use(config => {
   console.log(config.url)
-  // const token = localStorage.getItem("a-token")
-  // config.headers!!["Authorization"] = `Bearer ${token}`
+  const token = localStorage.getItem(TOKEN_KEY)
+  config.headers!!["Authorization"] = `Bearer ${token}`
   return config
 }, (error) => {
   console.log("intercepted error req")
@@ -27,24 +28,25 @@ myAxios.interceptors.request.use(config => {
 myAxios.interceptors.response.use(
   response => response
   , async (err) => {
-    const originalConfig = err.config // as AxiosRequestConfig
-    if (err.response && originalConfig.url !== SIGNIN_API) {
-      if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
-        try {
-          const refreshToken = localStorage.getItem("b-token")
-          const resp = await refreshAxios.post<IResponseEntity<string>>('/api/auth/refresh-token', { refreshToken })
-          const newAccessToken = resp.data.data
+    // Refresh token is not needed right now
+    // const originalConfig = err.config // as AxiosRequestConfig
+    // if (err.response && originalConfig.url !== SIGNIN_API) {
+    //   if (err.response.status === 401 && !originalConfig._retry) {
+    //     originalConfig._retry = true;
+    //     try {
+    //       const refreshToken = localStorage.getItem("b-token")
+    //       const resp = await refreshAxios.post<IResponseEntity<string>>('/api/auth/refresh-token', { refreshToken })
+    //       const newAccessToken = resp.data.data
 
-          localStorage.setItem("a-token", newAccessToken)
-          return myAxios(originalConfig)
-        } catch (_err) {
-          localStorage.clear()
-          document.location.href = "/"
-          return Promise.reject(_err)
-        }
-      }
-    }
+    //       localStorage.setItem("a-token", newAccessToken)
+    //       return myAxios(originalConfig)
+    //     } catch (_err) {
+    //       localStorage.clear()
+    //       document.location.href = "/"
+    //       return Promise.reject(_err)
+    //     }
+    //   }
+    // }
     return Promise.reject(err)
   })
 

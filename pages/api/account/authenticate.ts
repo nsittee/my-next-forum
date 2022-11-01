@@ -12,8 +12,7 @@ export default function handler(
   const password = req.body.password
 
   const signedJwt = jwt.sign({
-    username,
-    password
+    username
   },
     JWT_SECRET,
   )

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { USERNAME_KEY } from '../constant/app-constant'
+import { TOKEN_KEY } from '../constant/app-constant'
 import { getAccount } from '../store/authSlice'
 import { MyFooter } from './my-footer'
 import { MyHead } from './my-head'
@@ -10,12 +10,10 @@ export const MainLayout = (props: any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const localUsername = window.localStorage.getItem(USERNAME_KEY)
-    if (localUsername == null) return
+    const localJwt = window.localStorage.getItem(TOKEN_KEY)
+    if (localJwt == null) return
 
-    dispatch(getAccount({
-      username: localUsername
-    }))
+    dispatch(getAccount())
   }, [])
 
   return (
