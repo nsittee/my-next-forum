@@ -13,7 +13,6 @@ const ThreadPage: NextPage = (props: any) => {
   const authState = useSelector(selectAuthState)
   const thread: IThread = props.thread
 
-  console.table(router.query)
   return (
     <div>
       {authState.authenticate &&
