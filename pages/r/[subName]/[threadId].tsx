@@ -13,26 +13,26 @@ const ThreadPage: NextPage = (props: any) => {
 
   return (
     <div>
-      <li>
+      <ul>
         {thread && <>
           {authState.authenticate &&
-            <ol><div key={0}>reading as `{authState.username}` </div></ol>
+            <li>reading as `{authState.username}`</li>
           }
-          <ol><div key={1}>{thread._id}</div></ol>
-          <ol><div key={2}>_id -- {thread._id}</div></ol>
-          <ol><div key={3}>Title -- {thread.Title}</div></ol>
-          <ol><div key={4}>Content -- {thread.Content}</div></ol>
-          <ol><div key={5}>CreatedDate -- {thread.CreatedDate}</div></ol>
-          <ol><div key={6}>Upvote -- {thread.Upvote}</div></ol>
-          <ol><div key={7}>Downvote -- {thread.Downvote}</div></ol>
-          <ol>
+          <li>{thread._id}</li>
+          <li>_id -- {thread._id}</li>
+          <li>Title -- {thread.Title}</li>
+          <li>Content -- {thread.Content}</li>
+          <li>CreatedDate -- {thread.CreatedDate}</li>
+          <li>Upvote -- {thread.Upvote}</li>
+          <li>Downvote -- {thread.Downvote}</li>
+          <li>
             <button>
               <Link href={'/'}><a>Home</a></Link>
             </button>
-          </ol>
+          </li>
         </>
         }
-      </li>
+      </ul>
     </div>
   )
 }

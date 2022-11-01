@@ -16,9 +16,7 @@ const Home: NextPage = (props: any) => {
 
   return (
     <div>
-      <button onClick={() => {
-        dispatch(getMainFeed())
-      }}>
+      <button onClick={() => dispatch(getMainFeed())}>
         refresh
       </button>
       {
