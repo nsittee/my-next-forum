@@ -33,7 +33,12 @@ const Home: NextPage = (props: any) => {
                 mainFeedState.threadList.map((thread, _) => {
                   if (!thread.SubParent?.SubLongName) return
                   return <li key={thread._id}>
-                    <Link href={`r/${thread.SubParent?.SubLongName}/${thread._id}`} >
+                    <Link href={{
+                      pathname: `r/${thread.SubParent?.SubLongName}/${thread._id}`,
+                      query: {
+                        from: 'mainFeed'
+                      }
+                    }}>
                       <a> {thread._id} --- {thread.Title}</a>
                     </Link>
                   </li>

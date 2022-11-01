@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { myAxios } from '../../../config/axios-config'
 import { ISub } from '../../../shared/model/sub.model'
@@ -8,16 +9,23 @@ import { IResponseEntity } from '../../../shared/response.model'
 import { selectAuthState } from '../../../store/authSlice'
 
 const ThreadPage: NextPage = (props: any) => {
+  const router = useRouter()
   const authState = useSelector(selectAuthState)
   const thread: IThread = props.thread
 
+  console.table(router.query)
   return (
     <div>
+      {authState.authenticate &&
+        <>
+          <p>reading as `{authState.username}`</p>
+          {router.query.from === 'mainFeed' &&
+            <p>Comes from MainFeed</p>
+          }
+        </>
+      }
       <ul>
         {thread && <>
-          {authState.authenticate &&
-            <li>reading as `{authState.username}`</li>
-          }
           <li>{thread._id}</li>
           <li>_id -- {thread._id}</li>
           <li>Title -- {thread.Title}</li>
