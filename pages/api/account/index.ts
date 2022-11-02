@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken'
 export const JWT_SECRET = 'secret'
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<boolean>
+  res: NextApiResponse
 ) {
-  if (req.method !== 'GET') return res.status(405).send(false)
+  if (req.method !== 'GET') return res.status(405)
 
   try {
     const token = req.headers.authorization?.split('Bearer ')[1] as string
@@ -16,8 +16,8 @@ export default function handler(
     // valid jwt, return true or some other user specific data
     return res.status(200).json(true)
   }
-  catch (e) {
-    console.log(e)
+  catch (e: any) {
+    console.table(`${e.name} : ${e.message}`)
     return res.status(401).send(false)
   }
 }

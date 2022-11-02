@@ -2,16 +2,8 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { ROLES } from '../constant/app-roles'
+import { PERMISSION_MAP } from '../constant/permission-map'
 import { selectAuthState } from '../store/authSlice'
-
-const ALL = [ROLES.ADMIN, ROLES.MODERATOR, ROLES.USER]
-const PERMISSION_MAP = [
-  { key: '/', value: ALL },
-  { key: '/profile', value: ALL },
-  { key: '/admin', value: [ROLES.ADMIN] },
-  { key: '/moderator', value: [ROLES.ADMIN, ROLES.MODERATOR] },
-  { key: '/r/[subName]/[threadId]', value: ALL },
-]
 
 export const PagePermission = (props: any) => {
   const authState = useSelector(selectAuthState)
