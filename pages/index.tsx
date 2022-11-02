@@ -11,7 +11,9 @@ const Home: NextPage = (props: any) => {
   // const sub: ISub = props.sub // for getServerSideProps, SSR
 
   useEffect(() => {
-    dispatch(getMainFeed())
+    if (mainFeedState.threadList.length === 0) {
+      dispatch(getMainFeed())
+    }
   }, [dispatch])
 
   return (
