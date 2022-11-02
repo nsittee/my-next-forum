@@ -5,7 +5,7 @@ export interface Status {
 }
 
 export const initialStatus: Status = {
-  isLoading: true,
+  isLoading: false,
   error: false,
   errorMessage: ''
 }

@@ -22,7 +22,7 @@ const Home: NextPage = (props: any) => {
       {
         mainFeedState.status.isLoading ?
           <div>
-            loading...
+            loading main feed...
           </div>
           :
           mainFeedState.status.error ?

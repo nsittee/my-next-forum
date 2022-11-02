@@ -5,6 +5,7 @@ import { getAccount } from '../store/authSlice'
 import { MyFooter } from './my-footer'
 import { MyHead } from './my-head'
 import { MyHeader } from './my-header'
+import { PagePermission } from './PagePermission'
 
 export const MainLayout = (props: any) => {
   const dispatch = useDispatch()
@@ -22,7 +23,9 @@ export const MainLayout = (props: any) => {
     }}>
       <MyHead title={props.title ? props.title : "my-forum"} />
       <MyHeader />
-      {props.children}
+      <PagePermission>
+        {props.children}
+      </PagePermission>
       <MyFooter />
     </div>
   )

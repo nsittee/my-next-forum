@@ -48,7 +48,7 @@ export const mainFeedSlice = createSlice({
         state.subLongName = initialState.subLongName
         state.subMember = initialState.subMember
         state.threadList = initialState.threadList
-        state.status.isLoading = initialState.status.isLoading
+        state.status.isLoading = true
         state.status.error = initialState.status.error
         state.status.errorMessage = initialState.status.errorMessage
       })
