@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import { myAxios } from '../../../config/axios-config'
+import { ssgAxios } from '../../../config/axios-config'
 import { ISub } from '../../../shared/model/sub.model'
 import { IThread } from '../../../shared/model/thread.model'
 import { IResponseEntity } from '../../../shared/response.model'
@@ -48,7 +48,7 @@ const ThreadPage: NextPage = (props: any) => {
 
 export const getStaticPaths = async () => {
   // Get available path, (just the ID of URL)
-  const sub = await myAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
+  const sub = await ssgAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
   // Thread without proper sub (broken data) will be ignored
   const cleanedSub = sub.data.data.SubThread?.filter(thread => thread.SubParent)
   const paths = cleanedSub?.map((thread) => {
@@ -71,7 +71,7 @@ export const getStaticProps = async (props: any) => {
   // Get the rest of the page props, the rest of the thread data
   try {
     const threadId = props.params.threadId
-    const res = await myAxios.get<IResponseEntity<IThread>>(`/api/threads/${threadId}`)
+    const res = await ssgAxios.get<IResponseEntity<IThread>>(`/api/threads/${threadId}`)
     thread = res.data.data
   } catch {
     // Handle non-existing page with `notFound` property

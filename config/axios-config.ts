@@ -1,7 +1,6 @@
-import { TOKEN_KEY } from './../constant/app-constant';
-import { IResponseEntity } from './../shared/response.model';
-import axios from 'axios'
+import axios from 'axios';
 import { appConstant } from '../constant/app-constant';
+import { TOKEN_KEY } from './../constant/app-constant';
 
 const SIGNIN_API = "/api/users/signin"
 
@@ -11,6 +10,11 @@ const myAxios = axios.create({
 })
 
 const refreshAxios = axios.create({
+  baseURL: appConstant.URL,
+  timeout: 10000
+})
+
+const ssgAxios = axios.create({
   baseURL: appConstant.URL,
   timeout: 10000
 })
@@ -50,4 +54,5 @@ myAxios.interceptors.response.use(
     return Promise.reject(err)
   })
 
-export { myAxios }
+export { myAxios, ssgAxios };
+
