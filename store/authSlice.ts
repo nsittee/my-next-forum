@@ -9,6 +9,7 @@ import { AppState } from "./store"
 export interface AuthState {
   authenticate: boolean,
   username: string,
+  roles: string[],
   token: string,
   status: Status
 }
@@ -17,6 +18,7 @@ export interface AuthState {
 const initialState: AuthState = {
   authenticate: false,
   username: '',
+  roles: [],
   token: '',
   status: initialStatus
 }
@@ -71,6 +73,7 @@ export const authSlice = createSlice({
       .addCase(authenticate.pending, (state, action) => {
         state.authenticate = false
         state.username = ''
+        state.roles = []
         state.token = ''
         state.status.isLoading = true
         state.status.error = false
@@ -107,6 +110,7 @@ export const authSlice = createSlice({
 
         state.authenticate = true
         state.username = payloadJwt.username
+        state.roles = (payloadJwt.auth as string).split(',')
         state.token = localJwt
         state.status.isLoading = false
         state.status.error = false

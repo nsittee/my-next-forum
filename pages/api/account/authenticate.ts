@@ -11,7 +11,7 @@ export default function handler(
   const username = req.body.username
   const password = req.body.password
   const sub = req.body.username
-  const auth = 'ROLE_ADMIN,ROLE_MODERATORT,ROLE_USER'
+  const auth = 'ROLE_ADMIN,ROLE_MODERATOR,ROLE_USER'
 
   const signedJwt = jwt.sign({
     username,
