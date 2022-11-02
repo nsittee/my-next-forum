@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux'
 import { ROLES } from '../constant/app-roles'
 import { selectAuthState } from '../store/authSlice'
 
+const ALL = [ROLES.ADMIN, ROLES.MODERATOR, ROLES.USER]
 const PERMISSION_MAP = [
-  { key: '/', value: [ROLES.ADMIN, ROLES.MODERATOR, ROLES.USER] },
+  { key: '/', value: ALL },
   { key: '/Admin', value: [ROLES.ADMIN] },
   { key: '/Moderator', value: [ROLES.ADMIN, ROLES.MODERATOR] },
-  { key: '/r/[subName]/[threadId]', value: [ROLES.ADMIN, ROLES.MODERATOR, ROLES.USER] },
+  { key: '/r/[subName]/[threadId]', value: ALL },
 ]
 
 export const PagePermission = (props: any) => {
@@ -18,6 +19,7 @@ export const PagePermission = (props: any) => {
   const currentPermission = PERMISSION_MAP.find((item) => {
     if (item.key === router.pathname) return item
   })
+
 
   const hasPermission = currentPermission?.value.some(r => authState.roles.indexOf(r) >= 0)
   return (
