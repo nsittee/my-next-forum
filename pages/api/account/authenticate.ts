@@ -10,11 +10,17 @@ export default function handler(
 
   const username = req.body.username
   const password = req.body.password
+  const sub = req.body.username
+  const auth = 'ROLE_ADMIN,ROLE_MODERATORT,ROLE_USER'
 
   const signedJwt = jwt.sign({
-    username
+    username,
+    sub,
+    auth
   },
-    JWT_SECRET,
+    JWT_SECRET, {
+    expiresIn: '45m'  // or '1h'
+  }
   )
 
   res.status(200).send(signedJwt)
