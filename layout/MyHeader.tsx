@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOKEN_KEY, USERNAME_KEY } from '../constant/app-constant'
+import { TOKEN_KEY } from '../constant/app-constant'
 import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {

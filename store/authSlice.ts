@@ -1,8 +1,8 @@
-import { TOKEN_KEY } from './../constant/app-constant';
-import jwt from 'jsonwebtoken'
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { myAxios } from "../config/axios-config"
-import { initialStatus, Status } from "./common"
+import jwt from 'jsonwebtoken'
+import { getUrl, myAxios, otherAxios } from "../config/axios-config"
+import { appConstant, TOKEN_KEY } from './../constant/app-constant'
+import { Status } from "./common"
 import { AppState } from "./store"
 
 // Type for our state
@@ -32,9 +32,11 @@ export const authenticate = createAsyncThunk(
   async (payload: any, thunkAPI) => {
     try {
       // Fake api call here
-      const username = payload.username
-      const password = payload.password
-      const response = await myAxios.post<string>('http://localhost:3000/api/account/authenticate', { username, password })
+      const body = {
+        username: payload.username,
+        password: payload.password
+      }
+      const response = await myAxios.post<string>(`${getUrl()}/api/account/authenticate`, body)
 
       return response.data
     }
@@ -47,7 +49,7 @@ export const getAccount = createAsyncThunk(
   'auth/getAccount',
   async (payload, thunkAPI) => {
     try {
-      const valid = (await myAxios.get<boolean>('http://localhost:3000/api/account')).data
+      const valid = (await myAxios.get<boolean>(`${getUrl()}/api/account`)).data
       if (!valid) return thunkAPI.rejectWithValue('signout')
 
       return valid
@@ -75,7 +77,7 @@ export const authSlice = createSlice({
       // state.authenticate = initialState.authenticate
       // state.username = initialState.username
       // state.token = initialState.token
-      document.location.href = '/'
+      document.location.href = appConstant.CONTEXT_PATH
       window.localStorage.removeItem(TOKEN_KEY)
     }
   },
@@ -99,7 +101,9 @@ export const authSlice = createSlice({
         // state.username = payloadJwt.username  // extract from jwt
         // state.token = responseJwt
         // state.status.isLoading = false
-        document.location.href = '/'
+
+        // document.location.href = appConstant.CONTEXT_PATH
+        document.location.reload()  // after signed in, stay on the same page
         window.localStorage.setItem(TOKEN_KEY, responseJwt)
       })
       .addCase(authenticate.rejected, (state, action) => {
@@ -132,7 +136,7 @@ export const authSlice = createSlice({
         state.status.error = true
         state.status.errorMessage = 'error during getAccount'
         localStorage.removeItem(TOKEN_KEY)
-        document.location.href = '/'
+        document.location.href = appConstant.CONTEXT_PATH
         // then sign out
       })
   }

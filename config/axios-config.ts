@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { appConstant } from '../constant/app-constant';
-import { TOKEN_KEY } from './../constant/app-constant';
+import { appConstant, TOKEN_KEY } from '../constant/app-constant';
 
 const SIGNIN_API = "/api/users/signin"
 
-const myAxios = axios.create({
+// for heroku api
+export const myAxios = axios.create({
   baseURL: appConstant.URL,
   timeout: 10000
 })
@@ -14,10 +14,20 @@ const refreshAxios = axios.create({
   timeout: 10000
 })
 
-const ssgAxios = axios.create({
+// for ssg callout
+export const ssgAxios = axios.create({
   baseURL: appConstant.URL,
   timeout: 10000
 })
+
+// for mock internal api
+export const otherAxios = axios.create({
+  timeout: 10000
+})
+
+export const getUrl = (): string => {
+  return `${document.location.origin}${appConstant.CONTEXT_PATH}`
+}
 
 myAxios.interceptors.request.use(config => {
   console.log(config.url)
@@ -53,6 +63,3 @@ myAxios.interceptors.response.use(
     // }
     return Promise.reject(err)
   })
-
-export { myAxios, ssgAxios };
-
