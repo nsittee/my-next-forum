@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
 import { getAccount, setNotAuthenticate } from '../store/authSlice'
-import { MyFooter } from './my-footer'
-import { MyHead } from './my-head'
-import { MyHeader } from './my-header'
+import { MyFooter } from './MyFooter'
+import { MyHead } from './MyHead'
+import { MyHeader } from './MyHeader'
 import { PagePermission } from './PagePermission'
 
 export const MainLayout = (props: any) => {

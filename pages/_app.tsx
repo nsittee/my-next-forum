@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
-import { MainLayout } from '../layout/main-layout'
+import { MainLayout } from '../layout/MainLayout'
 import { wrapper } from '../store/store'
 import '../styles/globals.css'
 
