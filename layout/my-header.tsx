@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { USERNAME_KEY } from '../constant/app-constant'
@@ -37,6 +38,18 @@ export const MyHeader = (props: any) => {
             </button>
           </div>
       }
+      <Link href={{ pathname: `/` }}>
+        <button> Home </button>
+      </Link>
+      <Link href={{ pathname: `Profile` }}>
+        <button> Profile </button>
+      </Link>
+      <Link href={{ pathname: `Admin` }}>
+        <button> Admin </button>
+      </Link>
+      <Link href={{ pathname: `Moderator` }}>
+        <button> Moderator </button>
+      </Link>
     </div>
   )
 }
