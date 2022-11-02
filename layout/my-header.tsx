@@ -11,45 +11,54 @@ export const MyHeader = (props: any) => {
 
   return (
     <div style={{
-      backgroundColor: "gray",
+      backgroundColor: 'gray',
+      display: 'flex'
     }}>
-      {
-        !authState.authenticate ?
-          <div>
-            <input onChange={(e) => setUsername(e.target.value)} />
-            <button disabled={username === ''} onClick={() => {
-              dispatch(authenticate({
-                username: username,
-                password: '123456'
-              }))
-            }}>
-              sign in
-            </button>
-          </div>
-          :
-          <div>
-            {authState.username}
-            <button onClick={() => {
-              window.localStorage.removeItem(TOKEN_KEY)
-              setUsername('')
-              dispatch(resetAuthState())
-            }}>
-              sign out
-            </button>
-          </div>
-      }
-      <Link href={{ pathname: `/` }}>
-        <button> Home </button>
-      </Link>
-      <Link href={{ pathname: `Profile` }}>
-        <button> Profile </button>
-      </Link>
-      <Link href={{ pathname: `Admin` }}>
-        <button> Admin </button>
-      </Link>
-      <Link href={{ pathname: `Moderator` }}>
-        <button> Moderator </button>
-      </Link>
+      <div style={{
+        width: '100%'
+      }}>
+        <Link href={{ pathname: `/` }}>
+          <button> Home </button>
+        </Link>
+        <Link href={{ pathname: `Profile` }}>
+          <button> Profile </button>
+        </Link>
+        <Link href={{ pathname: `Admin` }}>
+          <button> Admin </button>
+        </Link>
+        <Link href={{ pathname: `Moderator` }}>
+          <button> Moderator </button>
+        </Link>
+      </div>
+      <div style={{
+        width: '100%',
+      }}>
+        {
+          !authState.authenticate ?
+            <>
+              <input onChange={(e) => setUsername(e.target.value)} />
+              <button disabled={username === ''} onClick={() => {
+                dispatch(authenticate({
+                  username: username,
+                  password: '123456'
+                }))
+              }}>
+                sign in
+              </button>
+            </>
+            :
+            <>
+              <button>{authState.username}</button>
+              <button onClick={() => {
+                window.localStorage.removeItem(TOKEN_KEY)
+                setUsername('')
+                dispatch(resetAuthState())
+              }}>
+                sign out
+              </button>
+            </>
+        }
+      </div>
     </div>
   )
 }
