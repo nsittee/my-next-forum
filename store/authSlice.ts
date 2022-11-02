@@ -58,9 +58,11 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     resetAuthState(state) {
-      state.authenticate = initialState.authenticate
-      state.username = initialState.username
-      state.token = initialState.token
+      // Commented out for clean signout
+      // state.authenticate = initialState.authenticate
+      // state.username = initialState.username
+      // state.token = initialState.token
+      document.location.href = '/'
       window.localStorage.removeItem(TOKEN_KEY)
     }
   },
@@ -77,13 +79,13 @@ export const authSlice = createSlice({
       .addCase(authenticate.fulfilled, (state, action) => {
         const responseJwt = action.payload
         const payloadJwt = jwt.decode(responseJwt) as any
-        console.log(payloadJwt)
 
-        state.authenticate = true
-        state.username = payloadJwt.username  // extract from jwt
-        state.token = responseJwt
-        state.status.isLoading = false
-
+        // Commented out for clean signin
+        // state.authenticate = true
+        // state.username = payloadJwt.username  // extract from jwt
+        // state.token = responseJwt
+        // state.status.isLoading = false
+        document.location.href = '/'
         window.localStorage.setItem(TOKEN_KEY, responseJwt)
       })
       .addCase(authenticate.rejected, (state, action) => {
@@ -115,6 +117,7 @@ export const authSlice = createSlice({
         state.status.error = true
         state.status.errorMessage = 'error during getAccount'
         localStorage.removeItem(TOKEN_KEY)
+        document.location.href = '/'
         // then sign out
       })
   }
