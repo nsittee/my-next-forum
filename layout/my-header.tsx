@@ -20,13 +20,13 @@ export const MyHeader = (props: any) => {
         <Link href={{ pathname: `/` }}>
           <button> Home </button>
         </Link>
-        <Link href={{ pathname: `Profile` }}>
+        <Link href={{ pathname: `/profile` }}>
           <button> Profile </button>
         </Link>
-        <Link href={{ pathname: `Admin` }}>
+        <Link href={{ pathname: `/admin` }}>
           <button> Admin </button>
         </Link>
-        <Link href={{ pathname: `Moderator` }}>
+        <Link href={{ pathname: `/moderator` }}>
           <button> Moderator </button>
         </Link>
       </div>
