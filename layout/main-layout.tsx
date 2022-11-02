@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
-import { getAccount } from '../store/authSlice'
+import { getAccount, setNotAuthenticate } from '../store/authSlice'
 import { MyFooter } from './my-footer'
 import { MyHead } from './my-head'
 import { MyHeader } from './my-header'
@@ -12,9 +12,11 @@ export const MainLayout = (props: any) => {
 
   useEffect(() => {
     const localJwt = window.localStorage.getItem(TOKEN_KEY)
-    if (localJwt == null) return
-
-    dispatch(getAccount())
+    if (localJwt == null) {
+      dispatch(setNotAuthenticate())
+    } else {
+      dispatch(getAccount())
+    }
   }, [])
 
   return (

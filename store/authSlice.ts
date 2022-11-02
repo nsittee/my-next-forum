@@ -20,7 +20,11 @@ const initialState: AuthState = {
   username: '',
   roles: [],
   token: '',
-  status: initialStatus
+  status: {
+    isLoading: true,
+    error: false,
+    errorMessage: ''
+  }
 }
 
 export const authenticate = createAsyncThunk(
@@ -59,6 +63,13 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setNotAuthenticate(state) {
+      state.authenticate = false
+      state.username = ''
+      state.status.isLoading = false
+      state.status.error = false
+      state.status.errorMessage = ''
+    },
     resetAuthState(state) {
       // Commented out for clean signout
       // state.authenticate = initialState.authenticate
@@ -127,7 +138,7 @@ export const authSlice = createSlice({
   }
 })
 
-export const { resetAuthState } = authSlice.actions
+export const { resetAuthState, setNotAuthenticate } = authSlice.actions
 
 export const selectAuthState = (state: AppState) => state.auth
 

@@ -29,7 +29,9 @@ export const PagePermission = (props: any) => {
         :
         authState.authenticate ?
           hasPermission ?
-            props.children
+            <p>
+              {props.children}
+            </p>
             :
             <p>authenticate, no permission</p>
           :
