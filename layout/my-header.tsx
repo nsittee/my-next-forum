@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { USERNAME_KEY } from '../constant/app-constant'
+import { TOKEN_KEY, USERNAME_KEY } from '../constant/app-constant'
 import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
 
 export const MyHeader = (props: any) => {
@@ -30,7 +30,7 @@ export const MyHeader = (props: any) => {
           <div>
             {authState.username}
             <button onClick={() => {
-              window.localStorage.removeItem('TOKEN')
+              window.localStorage.removeItem(TOKEN_KEY)
               setUsername('')
               dispatch(resetAuthState())
             }}>
