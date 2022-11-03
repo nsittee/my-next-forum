@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import jwt from 'jsonwebtoken'
-import { getUrl, myAxios, otherAxios } from "../config/axios-config"
+import { getUrl, myAxios } from "../config/axios-config"
 import { appConstant, TOKEN_KEY } from './../constant/app-constant'
 import { Status } from "./common"
 import { AppState } from "./store"
@@ -23,7 +23,8 @@ const initialState: AuthState = {
   status: {
     isLoading: true,
     error: false,
-    errorMessage: ''
+    errorMessage: '',
+    successMessage: '',
   }
 }
 

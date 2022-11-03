@@ -20,11 +20,6 @@ export const ssgAxios = axios.create({
   timeout: 10000
 })
 
-// for mock internal api
-export const otherAxios = axios.create({
-  timeout: 10000
-})
-
 export const getUrl = (): string => {
   return `${document.location.origin}${appConstant.CONTEXT_PATH}`
 }
