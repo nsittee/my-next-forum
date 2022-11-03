@@ -13,10 +13,8 @@ export const PagePermission = (props: any) => {
   const [canView, setCanView] = useState(false)
 
   useEffect(() => {
-    const currentPermission = PERMISSION_MAP.find((item) => {
-      if (item.key === router.pathname) return item
-    })
-    const hasPermission = currentPermission?.value.some(r => authState.roles.indexOf(r) >= 0)
+    const currentPermission = PERMISSION_MAP.find((item) => item.path === router.pathname)
+    const hasPermission = currentPermission?.roles.some(r => authState.roles.indexOf(r) >= 0)
     if (hasPermission) {
       setCanView(true)
       if (currentPermission?.name !== '')
@@ -30,18 +28,21 @@ export const PagePermission = (props: any) => {
 
   return (
     <div>
-      {authState.status.isLoading ?
-        <p>loading user data...</p>
-        :
-        authState.authenticate ?
-          canView ?
-            <p>
-              {props.children}
-            </p>
-            :
-            <p>authenticate, no permission</p>
+      {
+        PERMISSION_MAP.find((item) => item.path === router.pathname)?.auth === false ? props.children
           :
-          <p>no authenticate</p>
+          authState.status.isLoading ?
+            <p>loading user data...</p>
+            :
+            authState.authenticate ?
+              canView ?
+                <p>
+                  {props.children}
+                </p>
+                :
+                <p>authenticate, no permission</p>
+              :
+              <p>no authenticate</p>
       }
     </div>
   )
