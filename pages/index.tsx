@@ -14,7 +14,7 @@ const Home: NextPage = (props: any) => {
     if (mainFeedState.threadList.length === 0) {
       dispatch(getMainFeed())
     }
-  }, [dispatch, mainFeedState])
+  }, [dispatch, mainFeedState.threadList])
 
   return (
     <div>

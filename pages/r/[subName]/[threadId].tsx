@@ -1,17 +1,24 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { ssgAxios } from '../../../config/axios-config'
 import { ISub } from '../../../shared/model/sub.model'
 import { IThread } from '../../../shared/model/thread.model'
 import { IResponseEntity } from '../../../shared/response.model'
 import { selectAuthState } from '../../../store/authSlice'
+import { setTitle } from '../../../store/mainSlice'
 
 const ThreadPage: NextPage = (props: any) => {
   const router = useRouter()
   const authState = useSelector(selectAuthState)
   const thread: IThread = props.thread
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setTitle(thread.Title))
+  }, [dispatch, thread.Title])
 
   return (
     <div>
