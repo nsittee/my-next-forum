@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
-import { MainLayout } from '../layout/MainLayout'
+import { Layout } from '../layout/Layout'
 import { wrapper } from '../store/store'
 import '../styles/globals.css'
 
@@ -9,9 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <MainLayout>
+      <Layout>
         <Component {...pageProps} />
-      </MainLayout>
+      </Layout>
     </Provider>
   )
 }

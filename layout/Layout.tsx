@@ -6,10 +6,10 @@ import { getAccount, setNotAuthenticate } from '../store/authSlice'
 import { XFooter } from './XFooter'
 import { XHead } from './XHead'
 import { XHeader } from './XHeader'
-import { PagePermission } from './PagePermission'
+import { Permission } from './Permission'
 import { XSidebar } from './XSidebar'
 
-export const MainLayout = (props: any) => {
+export const Layout = (props: any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,9 +32,9 @@ export const MainLayout = (props: any) => {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
-        <PagePermission>
+        <Permission>
           {props.children}
-        </PagePermission>
+        </Permission>
         <XFooter />
       </Box>
     </Box>

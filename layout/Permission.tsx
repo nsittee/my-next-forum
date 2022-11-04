@@ -5,7 +5,7 @@ import { PERMISSION_MAP } from '../constant/permission-map'
 import { selectAuthState } from '../store/authSlice'
 import { resetTitle, setTitle } from '../store/mainSlice'
 
-export const PagePermission = (props: any) => {
+export const Permission = (props: any) => {
   const authState = useSelector(selectAuthState)
   // const mainState = useSelector(selectMainState)
   const router = useRouter()
