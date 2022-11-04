@@ -7,7 +7,7 @@ import { TOKEN_KEY } from '../constant/app-constant'
 import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
 import { drawerWidth } from './XSidebar'
 
-export const MyHeader = (props: any) => {
+export const XHeader = (props: any) => {
   const authState = useSelector(selectAuthState)
   const [username, setUsername] = useState<string>('')
   const dispatch = useDispatch()

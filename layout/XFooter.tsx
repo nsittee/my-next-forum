@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export const MyFooter = () => {
+export const XFooter = () => {
   return (
     <footer>
       {/* <a

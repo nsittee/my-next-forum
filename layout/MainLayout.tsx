@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
 import { getAccount, setNotAuthenticate } from '../store/authSlice'
-import { MyFooter } from './MyFooter'
-import { MyHead } from './MyHead'
-import { MyHeader } from './MyHeader'
+import { XFooter } from './XFooter'
+import { XHead } from './XHead'
+import { XHeader } from './XHeader'
 import { PagePermission } from './PagePermission'
 import { XSidebar } from './XSidebar'
 
@@ -24,8 +24,8 @@ export const MainLayout = (props: any) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <MyHead title={props.title ? props.title : "my-forum"} />
-      <MyHeader />
+      <XHead title={props.title ? props.title : "my-forum"} />
+      <XHeader />
       <XSidebar />
 
       <Box component="main"
@@ -35,7 +35,7 @@ export const MainLayout = (props: any) => {
         <PagePermission>
           {props.children}
         </PagePermission>
-        <MyFooter />
+        <XFooter />
       </Box>
     </Box>
   )
