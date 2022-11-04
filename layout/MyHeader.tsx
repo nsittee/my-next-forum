@@ -1,13 +1,40 @@
+import { Menu } from '@mui/icons-material'
+import { AppBar, Button, CssBaseline, IconButton, Toolbar, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
 import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
+import { drawerWidth } from './XSidebar'
 
 export const MyHeader = (props: any) => {
   const authState = useSelector(selectAuthState)
   const [username, setUsername] = useState<string>('')
   const dispatch = useDispatch()
+
+  return (
+    <AppBar
+      position="fixed"
+      sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+    >
+      <CssBaseline />
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          <Menu />
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          app_name
+        </Typography>
+        <Button color="inherit">Login</Button>
+      </Toolbar>
+    </AppBar>
+  )
 
   return (
     <div style={{

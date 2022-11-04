@@ -1,3 +1,4 @@
+import { Box, CssBaseline, Toolbar } from '@mui/material'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
@@ -6,6 +7,7 @@ import { MyFooter } from './MyFooter'
 import { MyHead } from './MyHead'
 import { MyHeader } from './MyHeader'
 import { PagePermission } from './PagePermission'
+import { XSidebar } from './XSidebar'
 
 export const MainLayout = (props: any) => {
   const dispatch = useDispatch()
@@ -20,15 +22,21 @@ export const MainLayout = (props: any) => {
   }, [])
 
   return (
-    <div style={{
-      backgroundColor: "lightgray"
-    }}>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
       <MyHead title={props.title ? props.title : "my-forum"} />
       <MyHeader />
-      <PagePermission>
-        {props.children}
-      </PagePermission>
-      <MyFooter />
-    </div>
+      <XSidebar />
+
+      <Box component="main"
+        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+      >
+        <Toolbar />
+        <PagePermission>
+          {props.children}
+        </PagePermission>
+        <MyFooter />
+      </Box>
+    </Box>
   )
 }
