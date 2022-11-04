@@ -12,7 +12,8 @@ export interface PageData {
 export const PERMISSION_MAP: PageData[] = [
   { path: '/', name: 'Home', roles: ALL, auth: false },
   { path: '/profile', name: 'Profile', roles: ALL, auth: true },
+  { path: '/r/[subName]/[threadId]', name: '', roles: ALL, auth: false },
+
   { path: '/admin', name: 'Admin', roles: [ROLES.ADMIN], auth: true },
   { path: '/moderator', name: 'Moderator', roles: [ROLES.ADMIN, ROLES.MODERATOR], auth: true },
-  { path: '/r/[subName]/[threadId]', name: '', roles: ALL, auth: false },
 ]
