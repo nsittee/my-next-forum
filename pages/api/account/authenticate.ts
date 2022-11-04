@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '.'
+import { ROLES } from '../../../constant/app-roles'
 
 export default function handler(
   req: NextApiRequest,
@@ -11,7 +12,7 @@ export default function handler(
   const username = req.body.username
   const password = req.body.password
   const sub = req.body.username
-  const auth = 'ROLE_MODERATOR,ROLE_USER'
+  const auth = `${ROLES.MODERATOR},${ROLES.USER}`
 
   const signedJwt = jwt.sign({
     username,
