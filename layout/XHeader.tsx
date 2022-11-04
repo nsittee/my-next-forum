@@ -14,9 +14,10 @@ export const XHeader = (props: any) => {
 
   return (
     <AppBar
-      position="fixed"
-      sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+      position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    // position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
     >
+
       <CssBaseline />
       <Toolbar>
         <IconButton
