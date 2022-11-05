@@ -120,8 +120,8 @@ export const XSidebar = () => {
             }
           }
           return (
-            <>
-              <ListItem disablePadding key={index}>
+            <div key={`${index}-${menu.name}`}>
+              <ListItem disablePadding key={`${index}-${menu.name}`}>
                 <Link href={menu.path}>
                   <ListItemButton onClick={toggleSubMenu}>
                     <ListItemIcon>
@@ -138,7 +138,7 @@ export const XSidebar = () => {
               </ListItem>
               {
                 menu.subMenu != null &&
-                <Collapse in={openSubMenu[subMenuIndex].open} key='subMenu'>
+                <Collapse in={openSubMenu[subMenuIndex].open} key={`${index}-${menu.name}-subMenu`}>
                   {menu.subMenu.map((subMenu, subIndex) => {
                     return (
                       <ListItem disablePadding key={subIndex}>
@@ -160,7 +160,7 @@ export const XSidebar = () => {
                   })}
                 </Collapse>
               }
-            </>
+            </div>
           )
         })}
         <Divider />
