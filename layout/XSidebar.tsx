@@ -7,6 +7,10 @@ import HomeIcon from '@mui/icons-material/Home'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShieldIcon from '@mui/icons-material/Shield'
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
+import SettingsIcon from '@mui/icons-material/Settings'
+import MonitorIcon from '@mui/icons-material/Monitor'
+import HeadsetIcon from '@mui/icons-material/Headset'
+import KeyboardIcon from '@mui/icons-material/Keyboard'
 
 export const drawerWidth = 190;
 
@@ -60,12 +64,34 @@ const sidebarNavigationMap: IMenu[] = [
       },
     ]
   },
+  {
+    name: 'Setting',
+    path: '', // empty string will not make <Link/> navigate to anywhere
+    icon: <SettingsIcon />,
+    subMenu: [
+      {
+        name: 'Graphic',
+        path: '',
+        icon: <MonitorIcon />
+      },
+      {
+        name: 'Audio',
+        path: '',
+        icon: <HeadsetIcon />
+      },
+      {
+        name: 'Control',
+        path: '',
+        icon: <KeyboardIcon />
+      },
+    ]
+  },
 ]
 
 export const XSidebar = () => {
   const [openSubMenu, setOpenSubMenu] = useState([
     { name: 'Others', open: false },
-    { name: 'Others_2', open: false },
+    { name: 'Setting', open: false },
   ])
 
   return (
