@@ -36,9 +36,7 @@ export const Permission = (props: any) => {
             :
             authState.authenticate ?
               canView ?
-                <p>
-                  {props.children}
-                </p>
+                props.children
                 :
                 <p>authenticate, no permission</p>
               :
