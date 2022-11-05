@@ -1,11 +1,73 @@
-import { Menu } from '@mui/icons-material';
-import { Drawer, Toolbar, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material'
-import React, { useState } from 'react'
+import { Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material'
+import Link from 'next/link'
+import { ReactNode, useState } from 'react'
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox'
+import HomeIcon from '@mui/icons-material/Home'
+import MenuIcon from '@mui/icons-material/Menu'
+import ShieldIcon from '@mui/icons-material/Shield'
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
 
 export const drawerWidth = 190;
 
+interface IMenu {
+  name: string
+  path: string
+  icon?: ReactNode
+  subMenu?: IMenu[]
+}
+
+const sidebarNavigationMap: IMenu[] = [
+  {
+    name: 'Home',
+    path: '/',
+    icon: <HomeIcon />
+  },
+  {
+    name: 'Profile',
+    path: '/profile',
+    icon: <AccountBoxIcon />
+  },
+  {
+    name: 'Admin',
+    path: '/admin',
+    icon: <SupervisorAccountIcon />
+  },
+  {
+    name: 'Moderator',
+    path: '/moderator',
+    icon: <ShieldIcon />
+  },
+  {
+    name: 'Others',
+    path: '', // empty string will not make <Link/> navigate to anywhere
+    icon: <MenuIcon />,
+    subMenu: [
+      {
+        name: 'Profile',
+        path: '/profile',
+        icon: <AccountBoxIcon />
+      },
+      {
+        name: 'Admin',
+        path: '/admin',
+        icon: <SupervisorAccountIcon />
+      },
+      {
+        name: 'Moderator',
+        path: '/moderator',
+        icon: <ShieldIcon />
+      },
+    ]
+  },
+]
+
 export const XSidebar = () => {
-  const [openMenu, setOpenMenu] = useState(false)
+  const [openSubMenu, setOpenSubMenu] = useState([
+    { name: 'Others', open: false },
+    { name: 'Others_2', open: false },
+  ])
+
   return (
     <Drawer
       sx={{
@@ -22,41 +84,61 @@ export const XSidebar = () => {
       <Toolbar />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Menu />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {sidebarNavigationMap.map((menu, index) => {
+          const subMenuIndex = openSubMenu.findIndex(item => item.name === menu.name)
+          const toggleSubMenu = () => {
+            if (subMenuIndex != -1) {
+              const newSubMenuState = [...openSubMenu]
+              newSubMenuState[subMenuIndex].open = !newSubMenuState[subMenuIndex].open
+              setOpenSubMenu(newSubMenuState)
+            }
+          }
+          return (
+            <>
+              <ListItem disablePadding key={index}>
+                <Link href={menu.path}>
+                  <ListItemButton onClick={toggleSubMenu}>
+                    <ListItemIcon>
+                      {
+                        menu.icon != null ?
+                          menu.icon
+                          :
+                          <MenuIcon />
+                      }
+                    </ListItemIcon>
+                    <ListItemText primary={menu.name} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              {
+                menu.subMenu != null &&
+                <Collapse in={openSubMenu[subMenuIndex].open} key='subMenu'>
+                  {menu.subMenu.map((subMenu, subIndex) => {
+                    return (
+                      <ListItem disablePadding key={subIndex}>
+                        <Link href={subMenu.path}>
+                          <ListItemButton >
+                            <ListItemIcon>
+                              {
+                                subMenu.icon != null ?
+                                  subMenu.icon
+                                  :
+                                  <MenuIcon />
+                              }
+                            </ListItemIcon>
+                            <ListItemText primary={subMenu.name} />
+                          </ListItemButton>
+                        </Link>
+                      </ListItem>
+                    )
+                  })}
+                </Collapse>
+              }
+            </>
+          )
+        })}
         <Divider />
-
-        <ListItem key={'Others'} disablePadding>
-          <ListItemButton onClick={() => setOpenMenu(!openMenu)}>
-            <ListItemIcon>
-              <Menu />
-            </ListItemIcon>
-            <ListItemText primary={'Others'} />
-          </ListItemButton>
-        </ListItem>
       </List>
-      <Collapse in={openMenu} timeout="auto" unmountOnExit>
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Menu />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Collapse>
     </Drawer>
   )
 }
