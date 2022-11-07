@@ -1,15 +1,16 @@
 import { Menu } from '@mui/icons-material'
 import { AppBar, Box, Button, CssBaseline, Dialog, IconButton, Toolbar, Typography } from '@mui/material'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
+import { DrawerContext } from '../context/drawerContext'
 import { authenticate, resetAuthState, selectAuthState } from '../store/authSlice'
-import { drawerWidth } from './XSidebar'
 
 export const XHeader = (props: any) => {
   const authState = useSelector(selectAuthState)
   const [username, setUsername] = useState<string>('')
   const [signInDialog, setSignInDialog] = useState(false)
+  const drawerContext = useContext(DrawerContext)
   const dispatch = useDispatch()
 
   return (
@@ -26,6 +27,7 @@ export const XHeader = (props: any) => {
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
+          onClick={() => drawerContext.setOpen(!drawerContext.open)}
         >
           <Menu />
         </IconButton>

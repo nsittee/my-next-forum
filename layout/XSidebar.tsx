@@ -1,6 +1,6 @@
 import { Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useContext, useState } from 'react'
 
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import HomeIcon from '@mui/icons-material/Home'
@@ -11,6 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import MonitorIcon from '@mui/icons-material/Monitor'
 import HeadsetIcon from '@mui/icons-material/Headset'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
+import { DrawerContext } from '../context/drawerContext'
 
 export const drawerWidth = 190;
 
@@ -89,6 +90,7 @@ const sidebarNavigationMap: IMenu[] = [
 ]
 
 export const XSidebar = () => {
+  const drawerContext = useContext(DrawerContext)
   const [openSubMenu, setOpenSubMenu] = useState([
     { name: 'Others', open: false },
     { name: 'Setting', open: false },
@@ -104,7 +106,8 @@ export const XSidebar = () => {
           boxSizing: 'border-box',
         },
       }}
-      variant="permanent"
+      variant="persistent"
+      open={drawerContext.open}
       anchor="left"
     >
       <Toolbar />
