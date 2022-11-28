@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '.'
 import { ROLES } from '../../../constant/app-roles'
+import { setCookie } from 'cookies-next'
+import { OptionsType } from 'cookies-next/lib/types'
 
 export default function handler(
   req: NextApiRequest,
@@ -23,6 +25,17 @@ export default function handler(
     expiresIn: '45m'  // or '1h'
   }
   )
+  const option: OptionsType = {
+    req,
+    res,
+    httpOnly: true,
+    maxAge: 60 * 4 // 4 minutes
+  }
+  setCookie('tokenHttpOnly', signedJwt, option)
+  setCookie('token', signedJwt, { ...option, httpOnly: false })
 
-  res.status(200).send(signedJwt)
+  res
+    .status(200)
+    .setHeader('Roles', auth)
+    .send(signedJwt)
 }
