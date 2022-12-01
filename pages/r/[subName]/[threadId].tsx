@@ -17,8 +17,9 @@ const ThreadPage: NextPage = (props: any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setTitle(thread.Title))
-  }, [dispatch, thread.Title])
+    var title = thread.Title ? thread.Title : "reading..."
+    dispatch(setTitle(title))
+  }, [dispatch, thread])
 
   return (
     <div>
