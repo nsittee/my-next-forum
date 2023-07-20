@@ -56,20 +56,20 @@ const ThreadPage: NextPage = (props: any) => {
 
 export const getStaticPaths = async () => {
   // Get available path, (just the ID of URL)
-  const sub = await ssgAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
+  // const sub = await ssgAxios.get<IResponseEntity<ISub>>('/api/threads/from-sub')
   // Thread without proper sub (broken data) will be ignored
-  const cleanedSub = sub.data.data.SubThread?.filter(thread => thread.SubParent)
-  const paths = cleanedSub?.map((thread) => {
-    if (!thread || !thread.SubParent) return
-    return {
-      params: {
-        subName: thread.SubParent!!.SubLongName,
-        threadId: thread._id,
-      }
-    }
-  })
+  // const cleanedSub = sub.data.data.SubThread?.filter(thread => thread.SubParent)
+  // const paths = cleanedSub?.map((thread) => {
+  //   if (!thread || !thread.SubParent) return
+  //   return {
+  //     params: {
+  //       subName: thread.SubParent!!.SubLongName,
+  //       threadId: thread._id,
+  //     }
+  //   }
+  // })
   return {
-    paths: paths,
+    paths: [],
     fallback: true
   }
 }
