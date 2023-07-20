@@ -12,7 +12,7 @@ const Home: NextPage = (props: any) => {
 
   useEffect(() => {
     if (mainFeedState.threadList.length === 0) {
-      dispatch(getMainFeed())
+      // dispatch(getMainFeed())
     }
   }, [dispatch, mainFeedState.threadList])
 
