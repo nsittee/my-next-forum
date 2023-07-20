@@ -12,6 +12,7 @@ const Home: NextPage = (props: any) => {
 
   useEffect(() => {
     if (mainFeedState.threadList.length === 0) {
+      // FIXME: bring back this function later
       // dispatch(getMainFeed())
     }
   }, [dispatch, mainFeedState.threadList])
