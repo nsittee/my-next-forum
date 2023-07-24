@@ -12,7 +12,7 @@ export interface IxUser extends Mongoose.Document {
   UserSub: any,
 }
 
-const userSchema = new Mongoose.Schema({
+const schema = new Mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   Username: { type: String, required: true, unique: true },
   Password: { type: String, required: true },
@@ -35,4 +35,4 @@ const userSchema = new Mongoose.Schema({
   }]
 })
 
-export const User = Mongoose.models[name] || Mongoose.model<IxUser>(name, userSchema)
+export const User = Mongoose.models[name] || Mongoose.model<IxUser>(name, schema)

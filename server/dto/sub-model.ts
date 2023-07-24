@@ -10,7 +10,7 @@ export interface IxSub extends Mongoose.Document {
   SubThread: any,
 }
 
-const subSchema = new Mongoose.Schema({
+const schema = new Mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   SubLongName: String,
   SubShortName: String,
@@ -26,4 +26,4 @@ const subSchema = new Mongoose.Schema({
 
 })
 
-export const Sub = Mongoose.models[name] || Mongoose.model<IxSub>(name, subSchema)
+export const Sub = Mongoose.models[name] || Mongoose.model<IxSub>(name, schema)
