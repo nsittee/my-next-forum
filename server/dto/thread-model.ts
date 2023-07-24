@@ -1,7 +1,7 @@
-import Mongoose, { Model } from "mongoose"
-import tableConstant from "./table-constant"
+import Mongoose from "mongoose"
+import { tableName } from "./_table"
 
-const name = tableConstant.thread
+const name = tableName.thread
 export interface IxThread extends Mongoose.Document {
   _id: string,
   Title: string,
@@ -26,15 +26,15 @@ const schema = new Mongoose.Schema({
 
   Author: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.user
+    ref: tableName.user
   },
   ThreadComment: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.comment
+    ref: tableName.comment
   }],
   SubParent: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.sub
+    ref: tableName.sub
   }
 })
 

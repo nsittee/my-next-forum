@@ -1,5 +1,5 @@
 import dbConnect from "../config/db-config"
-import { IxSub, Sub } from "../model/sub-model"
+import { IxSub, Sub } from "../dto/sub-model"
 
 const getAll = async (): Promise<IxSub[]> => {
   await dbConnect()

@@ -1,7 +1,7 @@
 import Mongoose from "mongoose"
-import tableConstant from "./table-constant"
+import { tableName } from "./_table"
 
-const name = tableConstant.sub
+const name = tableName.sub
 export interface IxSub extends Mongoose.Document {
   _id: string,
   SubLongName: string,
@@ -17,11 +17,11 @@ const subSchema = new Mongoose.Schema({
 
   SubUser: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.user
+    ref: tableName.user
   }],
   SubThread: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.thread
+    ref: tableName.thread
   }]
 
 })

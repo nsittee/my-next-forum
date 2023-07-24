@@ -1,6 +1,6 @@
 import dbConnect from "../config/db-config"
-import { IxSub, Sub } from "../model/sub-model"
-import { Thread } from "../model/thread-model"
+import { IxSub, Sub } from "../dto/sub-model"
+import { Thread } from "../dto/thread-model"
 
 export const getSubFromId = async (subName: string): Promise<IxSub> => {
   const sub = await Sub

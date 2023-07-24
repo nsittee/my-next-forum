@@ -1,7 +1,7 @@
 import Mongoose from "mongoose"
-import tableConstant from "./table-constant"
+import { tableName } from "./_table"
 
-const name = tableConstant.user
+const name = tableName.user
 export interface IxUser extends Mongoose.Document {
   _id: string,
   Username: string,
@@ -19,19 +19,19 @@ const userSchema = new Mongoose.Schema({
 
   UpvoteThread: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.thread
+    ref: tableName.thread
   }],
   DownvoteThread: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.thread
+    ref: tableName.thread
   }],
   UserThread: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.thread
+    ref: tableName.thread
   }],
   UserSub: [{
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.sub
+    ref: tableName.sub
   }]
 })
 

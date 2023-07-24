@@ -1,6 +1,7 @@
 import Mongoose from "mongoose"
-import tableConstant from "./table-constant"
+import { tableName } from "./_table"
 
+const name = tableName.comment
 export interface IxComment extends Mongoose.Document {
   _id: string,
   Content: string,
@@ -12,8 +13,8 @@ const commentSchema = new Mongoose.Schema({
   Content: String,
   Commenter: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: tableConstant.user
+    ref: tableName.user
   }
 })
 
-export const Comment = Mongoose.model(tableConstant.comment, commentSchema)
+export const Comment = Mongoose.models[name] || Mongoose.model(name, commentSchema)
