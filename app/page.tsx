@@ -22,6 +22,7 @@ export default function Page({ pageProps }: AppProps) {
     <div>
       Root Page
       - {authState.authenticate} -
+      - {authState.roles} -
     </div>
   )
 }
