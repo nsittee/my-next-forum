@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
 import { DrawerContext } from '../../shared/context/drawerContext'
-import { authenticate, resetAuthState, selectAuthState } from '../../app/redux/store/auth-slice'
+import { selectAuthState, authenticate, resetAuthState } from '../redux/store/auth-slice'
 
 export const XHeader = (props: any) => {
   const authState = useSelector(selectAuthState)

@@ -3,8 +3,8 @@
 import { Metadata } from 'next'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMainFeed, selectMainFeedState } from './redux/store/main-feed-slice'
 import { Card, CardContent, Typography, CardActions, Button, Divider } from '@mui/material'
+import { getMainFeed, selectMainFeedState } from '../src/redux/store/main-feed-slice'
 
 export const metadata: Metadata = {
   title: 'MyForum',

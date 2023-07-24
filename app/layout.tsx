@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Provider } from 'react-redux'
 import { DrawerContext } from '../shared/context/drawerContext'
 import { CenterLayout } from '../src/layout/Layout'
-import { wrapper } from './redux/store'
+import { wrapper } from '../src/redux/store'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(true)

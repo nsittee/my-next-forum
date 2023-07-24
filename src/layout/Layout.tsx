@@ -6,7 +6,7 @@ import { XFooter } from './XFooter'
 import { XHeader } from './XHeader'
 import { drawerWidth, XSidebar } from './XSidebar'
 import { DrawerContext } from '../../shared/context/drawerContext'
-import { getAccount, setNotAuthenticate } from '../../app/redux/store/auth-slice'
+import { getAccount, setNotAuthenticate } from '../redux/store/auth-slice'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
