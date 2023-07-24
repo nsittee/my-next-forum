@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { Provider } from 'react-redux'
 import { DrawerContext } from '../context/drawerContext'
 import { Layout } from '../layout/Layout'
-import { wrapper } from '../store/store'
 import '../styles/globals.css'
+import { wrapper } from '../app/redux/store'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import { appConstant } from '../constant/app-constant'
-import { selectMainState } from '../store/mainSlice'
+import { selectMainState } from '../app/redux/store/store/mainSlice'
 
 export const XHead = (props: any) => {
   const mainState = useSelector(selectMainState)

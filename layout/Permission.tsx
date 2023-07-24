@@ -2,8 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PERMISSION_MAP } from '../constant/permission-map'
-import { selectAuthState } from '../store/authSlice'
-import { resetTitle, setTitle } from '../store/mainSlice'
+import { selectAuthState } from '../app/redux/store/store/authSlice'
+import { resetTitle, setTitle } from '../app/redux/store/store/mainSlice'
 
 export const Permission = (props: any) => {
   const authState = useSelector(selectAuthState)

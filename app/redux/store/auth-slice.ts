@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import jwt from 'jsonwebtoken'
-import { getUrl, myAxios } from "../config/axios-config"
-import { appConstant, TOKEN_KEY } from './../constant/app-constant'
 import { Status } from "./common"
-import { AppState } from "./store"
+import { AppState } from "../store"
+import { myAxios, getUrl } from "../../../config/axios-config"
+import { appConstant, TOKEN_KEY } from "../../../constant/app-constant"
 
 // Type for our state
 export interface AuthState {

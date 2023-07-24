@@ -7,8 +7,8 @@ import { ssgAxios } from '../../../config/axios-config'
 import { ISub } from '../../../shared/model/sub.model'
 import { IThread } from '../../../shared/model/thread.model'
 import { IResponseEntity } from '../../../shared/response.model'
-import { selectAuthState } from '../../../store/authSlice'
-import { setTitle } from '../../../store/mainSlice'
+import { selectAuthState } from '../../../app/redux/store/store/authSlice'
+import { setTitle } from '../../../app/redux/store/store/mainSlice'
 
 const ThreadPage: NextPage = (props: any) => {
   const router = useRouter()

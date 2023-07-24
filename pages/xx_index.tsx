@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMainFeed, selectMainFeedState } from '../store/mainFeedSlice'
+import { getMainFeed, selectMainFeedState } from '../app/redux/store/main-feed-slice'
 
 const Home: NextPage = (props: any) => {
   const dispatch = useDispatch()
