@@ -1,6 +1,7 @@
 import Mongoose from "mongoose"
 import tableConstant from "./table-constant"
 
+const name = tableConstant.user
 export interface IxUser extends Mongoose.Document {
   _id: string,
   Username: string,
@@ -34,4 +35,4 @@ const userSchema = new Mongoose.Schema({
   }]
 })
 
-export const User = Mongoose.model<IxUser>(tableConstant.user, userSchema)
+export const User = Mongoose.models[name] || Mongoose.model<IxUser>(name, userSchema)

@@ -21,6 +21,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
 
+// Create connection to db if not already created
 async function dbConnect() {
   if (cached.conn) {
     return cached.conn

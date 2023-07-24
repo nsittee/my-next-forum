@@ -4,10 +4,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<string>
+  res: NextApiResponse<any>
 ) {
   await dbConnect()
-  const threadList = await Thread.find().exec()
-  console.log(threadList.length)
-  res.status(200).json("OK")
+  const list = await Thread.find().exec()
+  res.status(200).json(list)
 }
