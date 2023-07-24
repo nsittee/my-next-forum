@@ -3,8 +3,8 @@
 import { Metadata } from 'next'
 import { useState } from 'react'
 import { Provider } from 'react-redux'
-import { DrawerContext } from '../context/drawerContext'
-import { CenterLayout } from '../layout/Layout'
+import { DrawerContext } from '../shared/context/drawerContext'
+import { CenterLayout } from '../src/layout/Layout'
 import { wrapper } from './redux/store'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

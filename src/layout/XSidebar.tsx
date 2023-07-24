@@ -11,7 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import MonitorIcon from '@mui/icons-material/Monitor'
 import HeadsetIcon from '@mui/icons-material/Headset'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
-import { DrawerContext } from '../context/drawerContext'
+import { DrawerContext } from '../../shared/context/drawerContext'
 
 export const drawerWidth = 190;
 

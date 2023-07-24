@@ -1,8 +1,8 @@
 import { initialStatus } from './common';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
-import { myAxios } from '../../../config/axios-config';
-import { appConstant } from '../../../constant/app-constant';
+import { myAxios } from '../../../src/config/axios-config';
+import { appConstant } from '../../../src/constant/app-constant';
 import { ISub } from '../../../shared/model/sub.model';
 import { IThread } from '../../../shared/model/thread.model';
 import { IUser } from '../../../shared/model/user.model';

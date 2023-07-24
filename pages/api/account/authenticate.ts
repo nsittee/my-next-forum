@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '.'
-import { ROLES } from '../../../constant/app-roles'
+import { ROLES } from '../../../src/constant/app-roles'
 import { setCookie } from 'cookies-next'
 import { OptionsType } from 'cookies-next/lib/types'
 
