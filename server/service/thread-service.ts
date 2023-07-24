@@ -35,7 +35,6 @@ const getAll = async (subId?: string): Promise<any[]> => {
       .exec()
   }
 
-  console.log(list[0])
   return Promise.resolve(list)
 }
 
