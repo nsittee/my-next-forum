@@ -4,11 +4,10 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ssgAxios } from '../../../config/axios-config'
-import { ISub } from '../../../shared/model/sub.model'
 import { IThread } from '../../../shared/model/thread.model'
 import { IResponseEntity } from '../../../shared/response.model'
-import { selectAuthState } from '../../../app/redux/store/store/authSlice'
-import { setTitle } from '../../../app/redux/store/store/mainSlice'
+import { selectAuthState } from '../../../app/redux/store/auth-slice'
+import { setTitle } from '../../../app/redux/store/main-slice'
 
 const ThreadPage: NextPage = (props: any) => {
   const router = useRouter()

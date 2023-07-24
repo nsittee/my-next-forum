@@ -2,13 +2,12 @@ import { Box, CssBaseline, styled, Toolbar } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
-import { getAccount, setNotAuthenticate } from '../app/redux/store/store/authSlice'
 import { XFooter } from './XFooter'
 import { XHead } from './XHead'
 import { XHeader } from './XHeader'
-import { Permission } from './Permission'
 import { drawerWidth, XSidebar } from './XSidebar'
 import { DrawerContext } from '../context/drawerContext'
+import { getAccount, setNotAuthenticate } from '../app/redux/store/auth-slice'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
@@ -29,7 +28,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }));
 
-export const Layout = (props: any) => {
+export const StyledLayout = (props: any) => {
   const dispatch = useDispatch()
   const drawerContext = useContext(DrawerContext)
 
@@ -45,7 +44,6 @@ export const Layout = (props: any) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <XHead title={props.title ? props.title : "my-forum"} />
       <XHeader />
       <XSidebar />
 
@@ -54,9 +52,7 @@ export const Layout = (props: any) => {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
-        <Permission>
-          {props.children}
-        </Permission>
+        {props.children}
         <XFooter />
       </Main>
     </Box>
