@@ -1,12 +1,10 @@
-import dbConnect from '@/server/config/db-config'
-import { Sub } from '@/server/model/sub-model'
+import { subService } from '@/server/service/sub-service'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  await dbConnect()
-  const list = await Sub.find().exec()
+  const list = await subService.getAll()
   res.status(200).json(list)
 }

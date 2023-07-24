@@ -23,7 +23,6 @@ if (!cached) {
 // Create connection to db if not already created
 async function dbConnect() {
   if (cached.conn) {
-    console.log("cached")
     return cached.conn
   }
 
