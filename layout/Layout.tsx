@@ -1,9 +1,8 @@
 import { Box, CssBaseline, styled, Toolbar } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { TOKEN_KEY } from '../constant/app-constant'
 import { XFooter } from './XFooter'
-import { XHead } from './XHead'
 import { XHeader } from './XHeader'
 import { drawerWidth, XSidebar } from './XSidebar'
 import { DrawerContext } from '../context/drawerContext'
@@ -28,7 +27,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }));
 
-export const StyledLayout = (props: any) => {
+export const CenterLayout = (props: any) => {
   const dispatch = useDispatch()
   const drawerContext = useContext(DrawerContext)
 

@@ -1,10 +1,10 @@
 'use client'
+
 import { Metadata } from 'next'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMainFeed, selectMainFeedState } from './redux/store/main-feed-slice'
 import { Card, CardContent, Typography, CardActions, Button, Divider } from '@mui/material'
-import { Padding } from '@mui/icons-material'
 
 export const metadata: Metadata = {
   title: 'MyForum',
@@ -39,6 +39,7 @@ export default function Page() {
                   {thread.Content}
                   <br />
                   {thread.Upvote}
+                  <br />
                   {thread.Downvote}
                 </Typography>
               </CardContent>
