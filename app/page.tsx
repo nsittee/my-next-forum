@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMainFeed, selectMainFeedState } from './redux/store/main-feed-slice'
+import { Card, CardContent, Typography, CardActions, Button, Divider } from '@mui/material'
+import { Padding } from '@mui/icons-material'
 
 export const metadata: Metadata = {
   title: 'MyForum',
@@ -18,18 +20,36 @@ export default function Page() {
 
   return (
     <div>
-      Thread List
-      Total Thread: {mainFeedState.threadList.length}
-      <section>
-        {
-          mainFeedState.threadList.map((thread, id) => {
-            return <div key={id}>
-              <p>{thread._id}</p>
-              <p>{thread.Title}</p>
-            </div>
-          })
-        }
-      </section>
+      {
+        mainFeedState.threadList.map((thread, id) => {
+          return <>
+            <Card key={id} sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  {thread.Author?.Username}
+                </Typography>
+                <Typography variant="h5" component="div">
+                  {thread.Title}
+
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  {thread.CreatedDate}
+                </Typography>
+                <Typography variant="body2">
+                  {thread.Content}
+                  <br />
+                  {thread.Upvote}
+                  {thread.Downvote}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+            <Divider />
+          </>
+        })
+      }
     </div>
   )
 }
