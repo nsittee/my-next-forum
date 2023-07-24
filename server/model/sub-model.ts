@@ -1,6 +1,7 @@
 import Mongoose from "mongoose"
 import tableConstant from "./table-constant"
 
+const name = tableConstant.sub
 export interface IxSub extends Mongoose.Document {
   _id: string,
   SubLongName: string,
@@ -25,4 +26,4 @@ const subSchema = new Mongoose.Schema({
 
 })
 
-export const Sub = Mongoose.model<IxSub>(tableConstant.sub, subSchema)
+export const Sub = Mongoose.models[name] || Mongoose.model<IxSub>(name, subSchema)
