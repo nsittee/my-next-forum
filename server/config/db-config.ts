@@ -17,22 +17,24 @@ const dbConnection = process.env.DB_CONNECTION!
 let cached = global.mongoose
 
 if (!cached) {
-  console.log("no cached")
   cached = global.mongoose = { conn: null, promise: null }
 }
 
 // Create connection to db if not already created
 async function dbConnect() {
   if (cached.conn) {
+    console.log("cached")
     return cached.conn
   }
 
+  console.log("no cached")
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
     }
-
+    console.log("creating...")
     cached.promise = mongoose.connect(dbConnection, opts).then((mongoose) => {
+      console.log("created new connection successfully")
       return mongoose
     })
   }
