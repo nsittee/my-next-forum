@@ -22,7 +22,7 @@ export const getMainFeed = createAsyncThunk(
   'mainFeed/getMainFeed',
   async (_payload, thunkAPI) => {
     try {
-      const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`${appConstant.URL}api/threads/from-sub`)).data.data
+      const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`/api/v1/thread/all`)).data.data
       return subResponse;
     }
     catch (e) {
