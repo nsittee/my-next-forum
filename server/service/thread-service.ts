@@ -1,8 +1,10 @@
 import dbConnect from "../config/db-config"
-import { IxSub, Sub } from "../dto/sub-model"
-import { Thread } from "../dto/thread-model"
+import { IxSub, Sub } from "../entity/sub-model"
+import { Thread } from "../entity/thread-model"
 
 export const getSubFromId = async (subName: string): Promise<IxSub> => {
+  await dbConnect()
+
   const sub = await Sub
     .findOne()
     .where({ SubLongName: subName })

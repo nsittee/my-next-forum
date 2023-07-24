@@ -1,5 +1,6 @@
-import mongoose from 'mongoose'
-import process from 'process'
+import mongoose from 'mongoose';
+import process from 'process';
+import { initSchema } from '../entity';
 
 // global.d.ts
 // Just to get rid of the warning
@@ -34,6 +35,7 @@ async function dbConnect() {
     console.log("creating...")
     cached.promise = mongoose.connect(dbConnection, opts).then((mongoose) => {
       console.log("created new connection successfully")
+      initSchema()
       return mongoose
     })
   }
