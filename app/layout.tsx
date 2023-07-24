@@ -1,16 +1,19 @@
+'use client'
+
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { useState } from 'react'
 
-export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [counter, setCounter] = useState(0)
+
   return (
     <html lang="en">
       <body>
+        <button onClick={() => setCounter(counter + 1)}>
+          {counter}
+        </button>
+
         <div>
           <div>app-bar</div>
           <Link href={'/'}>
