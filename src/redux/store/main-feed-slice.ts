@@ -1,4 +1,4 @@
-import { initialStatus } from './common';
+import { initialStatus } from '../common';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
 import { ISub } from '../../model/sub.model';
