@@ -26,8 +26,6 @@ export const fetchApi = async (
     })
   }
 
-  console.log(method)
-
   try {
     const fetchResponse = await fetch(
       url,
