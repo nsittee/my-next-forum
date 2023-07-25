@@ -1,12 +1,11 @@
 import { initialStatus } from './common';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
-import { myAxios } from '../../../src/config/axios-config';
-import { appConstant } from '../../../src/constant/app-constant';
 import { ISub } from '../../model/sub.model';
 import { IThread } from '../../model/thread.model';
 import { IUser } from '../../model/user.model';
 import { IResponseEntity } from '../../model/response.model';
+import { HttpMethod, fetchApi } from '../../shared/http-client';
 
 const initialState = {
   subId: '',
@@ -22,8 +21,9 @@ export const getMainFeed = createAsyncThunk(
   'mainFeed/getMainFeed',
   async (_payload, thunkAPI) => {
     try {
-      const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`/api/v1/thread/all`)).data.data
-      return subResponse;
+      // const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`/api/v1/thread/all`)).data.data
+      const response: IResponseEntity<ISub> = await fetchApi(`/api/v1/thread/all`, HttpMethod.GET)
+      return response.data
     }
     catch (e) {
       return thunkAPI.rejectWithValue(e)
