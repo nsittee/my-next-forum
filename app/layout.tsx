@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { DrawerContext } from '../src/context/drawerContext'
 import { CenterLayout } from '../src/layout/Layout'
 import { wrapper } from '../src/redux/store'
+import { NextAuthProvider } from './providers'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(true)
@@ -17,13 +18,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <DrawerContext.Provider value={drawerContextValue}>
-          <Provider store={wrapper.useWrappedStore({ initialState: {} }).store}>
-            <CenterLayout>
-              {children}
-            </CenterLayout>
-          </Provider>
-        </DrawerContext.Provider>
+        <NextAuthProvider>
+          <DrawerContext.Provider value={drawerContextValue}>
+            <Provider store={wrapper.useWrappedStore({ initialState: {} }).store}>
+              <CenterLayout>
+                {children}
+              </CenterLayout>
+            </Provider>
+          </DrawerContext.Provider>
+        </NextAuthProvider>
       </body>
     </html >
   )

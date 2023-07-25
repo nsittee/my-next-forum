@@ -1,3 +1,4 @@
+import { withAuth } from 'next-auth/middleware'
 import type { NextRequest } from 'next/server'
 
 const formatTimestamp = (date: Date): string => {
@@ -23,3 +24,16 @@ export const config = {
     '/((?!_next/static|favicon.ico).*)',
   ],
 }
+
+export default withAuth({
+  callbacks: {
+    authorized({ req, token }) {
+      console.log(req.nextUrl.pathname)
+      if (req.nextUrl.pathname === "/setting") {
+        return token?.userRole === "admin"
+      }
+      // `/me` only requires the user to be logged in
+      return !!token
+    },
+  },
+})
