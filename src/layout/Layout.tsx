@@ -5,7 +5,7 @@ import { TOKEN_KEY } from '../constant/app-constant'
 import { XFooter } from './XFooter'
 import { XHeader } from './XHeader'
 import { drawerWidth, XSidebar } from './XSidebar'
-import { DrawerContext } from '../../shared/context/drawerContext'
+import { DrawerContext } from '../context/drawerContext'
 import { getAccount, setNotAuthenticate } from '../redux/store/auth-slice'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{

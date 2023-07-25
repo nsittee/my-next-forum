@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
 import { myAxios } from '../../../src/config/axios-config';
 import { appConstant } from '../../../src/constant/app-constant';
-import { ISub } from '../../../shared/model/sub.model';
-import { IThread } from '../../../shared/model/thread.model';
-import { IUser } from '../../../shared/model/user.model';
-import { IResponseEntity } from '../../../shared/response.model';
+import { ISub } from '../../model/sub.model';
+import { IThread } from '../../model/thread.model';
+import { IUser } from '../../model/user.model';
+import { IResponseEntity } from '../../model/response.model';
 
 const initialState = {
   subId: '',

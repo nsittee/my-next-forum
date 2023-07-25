@@ -3,7 +3,7 @@
 import { Metadata } from 'next'
 import { useState } from 'react'
 import { Provider } from 'react-redux'
-import { DrawerContext } from '../shared/context/drawerContext'
+import { DrawerContext } from '../src/context/drawerContext'
 import { CenterLayout } from '../src/layout/Layout'
 import { wrapper } from '../src/redux/store'
 
