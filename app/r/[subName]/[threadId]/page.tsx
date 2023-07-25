@@ -4,7 +4,7 @@ import { Card } from '@mui/material'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sub Name Here',
+  title: 'Thread',
 }
 
 async function getData() {
@@ -16,6 +16,6 @@ async function getData() {
 
 export default function Page() {
   return <Card>
-    Sub Page
+    Thread Page
   </Card>
 }
