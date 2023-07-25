@@ -9,7 +9,13 @@ const formatTimestamp = (date: Date): string => {
 // This function can be marked `async` if using `await` inside
 export function middleware(req: NextRequest) {
   const timestamp = formatTimestamp(new Date())
-  console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}|${req.mode}`)
+
+  if (req.nextUrl.pathname.startsWith("/api")) {
+    // TODO: Verify bearer token
+    const token = req.cookies.get("tokenHttpOnly")?.value || ""
+    console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}|${req.mode}|${token.substring(0, 10)}`)
+  }
+
 }
 
 export const config = {
