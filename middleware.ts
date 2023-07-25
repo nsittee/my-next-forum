@@ -9,10 +9,17 @@ const formatTimestamp = (date: Date): string => {
 // This function can be marked `async` if using `await` inside
 export function middleware(req: NextRequest) {
   const timestamp = formatTimestamp(new Date())
-  console.log(`${timestamp}|${req.method}|${req.nextUrl}|${req.mode}`)
+  console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}|${req.mode}`)
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/',
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!_next/static|favicon.ico).*)',
+  ],
 }

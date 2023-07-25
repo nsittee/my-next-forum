@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   // const subId = threadService.getSubFromId()
-  console.log(req.url)
   const list = await threadService.getAll()
   res.status(200).json({
     message: null,
