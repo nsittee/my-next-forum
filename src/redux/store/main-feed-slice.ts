@@ -23,7 +23,7 @@ export const getMainFeed = createAsyncThunk(
     try {
       // const subResponse = (await myAxios.get<IResponseEntity<ISub>>(`/api/v1/thread/all`)).data.data
       const response: IResponseEntity<ISub> = await fetchApi(`/api/v1/thread/all`, HttpMethod.GET)
-      return response.data
+      return response
     }
     catch (e) {
       return thunkAPI.rejectWithValue(e)
@@ -53,7 +53,7 @@ export const mainFeedSlice = createSlice({
         state.status.errorMessage = initialState.status.errorMessage
       })
       .addCase(getMainFeed.fulfilled, (state, action) => {
-        const sub: ISub = action.payload
+        const sub: ISub = action.payload.data
         state.subId = sub._id!!
         state.subLongName = sub.SubLongName!!
         state.subMember = sub.SubUser!!
