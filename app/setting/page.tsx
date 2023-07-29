@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signIn("1")}>Sign in</button>
     </>
   )
 }
