@@ -5,6 +5,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      console.log({ user, account, profile, email, credentials })
       const isAllowedToSignIn = true
       if (isAllowedToSignIn) {
         return Promise.resolve(true)
@@ -47,8 +48,12 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        console.log(credentials)
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+        // console.log(credentials)
+        const user = {
+          id: "#",
+          roles: ["admin"],
+          name: credentials?.username
+        }
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -61,7 +66,10 @@ const authOptions: NextAuthOptions = {
         }
       }
     })
-  ]
+  ],
+  pages: {
+    signIn: "/auth/signin"
+  }
 };
 
 const handler = NextAuth(authOptions);

@@ -15,7 +15,15 @@ export default function Index() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signIn(
+        "credentials",
+        {
+          username: "x",
+          password: "#",
+          redirect: true,
+          callbackUrl: "/auth/signin",
+        }
+      )}>Sign in</button>
     </>
   )
 }
