@@ -4,10 +4,10 @@ import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Index() {
   const { data: session } = useSession()
-  if (session) {
+  if (session && session.user) {
     return (
       <>
-        Signed in as {session.user}: {session.user?.email} <br />
+        Signed in as {session.user?.name}, {session.user?.email} <br />
         <button onClick={() => signOut()}>Sign out</button>
       </>
     )
@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn("1")}>Sign in</button>
+      <button onClick={() => signIn()}>Sign in</button>
     </>
   )
 }

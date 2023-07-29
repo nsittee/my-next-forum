@@ -1,6 +1,7 @@
 'use client'
 
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { useState } from 'react'
 import { Provider } from 'react-redux'
 import { DrawerContext } from '../src/context/drawerContext'
@@ -22,6 +23,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <DrawerContext.Provider value={drawerContextValue}>
             <Provider store={wrapper.useWrappedStore({ initialState: {} }).store}>
               <CenterLayout>
+                <Link href={"/setting"}>/setting</Link>
+
                 {children}
               </CenterLayout>
             </Provider>
