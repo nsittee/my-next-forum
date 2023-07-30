@@ -1,19 +1,15 @@
 import { Menu } from '@mui/icons-material'
-import { AppBar, Box, Button, CssBaseline, Dialog, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Card, CardContent, CssBaseline, Dialog, IconButton, Toolbar, Typography } from '@mui/material'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useContext, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { TOKEN_KEY } from '../constant/app-constant'
 import { DrawerContext } from '../context/drawerContext'
-import { selectAuthState, authenticate, resetAuthState } from '../redux/store/auth-slice'
-import { useSession } from 'next-auth/react'
 
 export const XHeader = (props: any) => {
-  // const authState = useSelector(selectAuthState)
   const session = useSession()
   const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
   const [signInDialog, setSignInDialog] = useState(false)
   const drawerContext = useContext(DrawerContext)
-  const dispatch = useDispatch()
 
   return (
     <AppBar
@@ -54,36 +50,44 @@ export const XHeader = (props: any) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          {
-            session.status === "authenticated" ?
-              <>
-                <button>{session.data.user?.name}</button>
-                <button
-                  onClick={() => {
-                    // TODO
-                    // window.localStorage.removeItem(TOKEN_KEY)
-                    // setUsername('')
-                    // dispatch(resetAuthState())
-                  }}>
-                  sign out
-                </button>
-              </>
-              :
-              <>
-                <input onChange={(e) => setUsername(e.target.value)} />
-                <button
-                  disabled={username === ''}
-                  onClick={() => {
-                    // TODO
-                    // dispatch(authenticate({
-                    //   username: username,
-                    //   password: '123456'
-                    // }))
-                  }}>
-                  sign in
-                </button>
-              </>
-          }
+          <Card>
+            <CardContent>
+              {
+                session.status === "authenticated" ?
+                  <>
+                    <button>{session.data.user?.name}</button>
+                    <button
+                      onClick={() => {
+                        // TODO
+                        signOut()
+                      }}>
+                      sign out
+                    </button>
+                  </>
+                  :
+                  <>
+                    <label>username: </label>
+                    <input onChange={(e) => setUsername(e.target.value)} />
+                    <br />
+                    <label>password: </label>
+                    <input onChange={(e) => setPassword(e.target.value)} />
+                    <br />
+                    <button
+                      disabled={username === ''}
+                      onClick={() => {
+                        signIn("credentials", {
+                          username: username,
+                          password: password,
+                          redirect: true,
+                          callbackUrl: "/",
+                        })
+                      }}>
+                      sign in
+                    </button>
+                  </>
+              }
+            </CardContent>
+          </Card>
         </Box>
       </Dialog>
     </AppBar>

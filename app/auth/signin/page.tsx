@@ -6,29 +6,28 @@ import { useState } from "react"
 const SigninPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
   return <div>
-    LoginPage
-    <div>
-      <input
-        value={username}
-        onChange={e => { setUsername(e.target.value) }}
-        placeholder="username" />
-      <input
-        type="password"
-        value={password}
-        onChange={e => { setPassword(e.target.value) }}
-        placeholder="password" />
+    <>
+      <label>username: </label>
+      <input onChange={(e) => setUsername(e.target.value)} />
+      <br />
+      <label>password: </label>
+      <input onChange={(e) => setPassword(e.target.value)} />
+      <br />
       <button
+        disabled={username === ''}
         onClick={() => {
           signIn("credentials", {
-            username,
-            password,
+            username: username,
+            password: password,
             redirect: true,
             callbackUrl: "/",
           })
-        }}
-      >login</button>
-    </div>
+        }}>
+        sign in
+      </button>
+    </>
   </div>
 }
 
