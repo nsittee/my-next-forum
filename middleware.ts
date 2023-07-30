@@ -1,5 +1,5 @@
 import { withAuth } from 'next-auth/middleware'
-import type { NextRequest } from 'next/server'
+import type { NextRequest, NextResponse } from 'next/server'
 
 const formatTimestamp = (date: Date): string => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` +
@@ -8,9 +8,9 @@ const formatTimestamp = (date: Date): string => {
 }
 
 // This function can be marked `async` if using `await` inside
-export function middleware(req: NextRequest) {
+export const middleware = async (req: NextRequest, res: NextResponse) => {
   const timestamp = formatTimestamp(new Date())
-  console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}|${req.mode}`)
+  console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}`)
 }
 
 export const config = {
@@ -28,12 +28,13 @@ export const config = {
 export default withAuth({
   callbacks: {
     authorized({ req, token }) {
+      console.log("withAuth")
       console.log(req.nextUrl.pathname)
-      if (req.nextUrl.pathname === "/setting") {
-        return token?.userRole === "admin"
-      }
+      // if (req.nextUrl.pathname === "/setting") {
+      //   return token?.userRole === "admin"
+      // }
       // `/me` only requires the user to be logged in
-      return !!token
+      return true
     },
   },
 })
