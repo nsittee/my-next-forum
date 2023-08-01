@@ -4,8 +4,8 @@ import { NextAuthOptions } from 'next-auth';
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, credentials }) {
-      console.log(">>>>>>> signIn() callback")
-      console.log({ user, account, credentials })
+      // console.log(">>>>>>> signIn() callback")
+      // console.log({ user, account, credentials })
       const isAllowedToSignIn = true
       if (isAllowedToSignIn) {
         return Promise.resolve(true)
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      console.log(">>>>>>> redirect() callback")
+      // console.log(">>>>>>> redirect() callback")
       if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url
@@ -25,13 +25,13 @@ export const authOptions: NextAuthOptions = {
       // Send properties to the client, like an access_token and user id from a provider.
       // TODO: Review later
       (session as any).auth = (token as any).auth;
-      console.log(">>>>>>> session() callback")
-      console.log({ session, token })
+      // console.log(">>>>>>> session() callback")
+      // console.log({ session, token })
       return session
     },
     async jwt({ token, user }) {
-      console.log(">>>>>>> jwt() callback")
-      console.log({ token, user })
+      // console.log(">>>>>>> jwt() callback")
+      // console.log({ token, user })
       if (user) {
         const auth = (user as any).auth as string[]
         token.auth = auth
