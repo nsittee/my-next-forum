@@ -3,8 +3,9 @@ import { NextAuthOptions } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials })
+    async signIn({ user, account, credentials }) {
+      console.log(">>>>>>> signIn() callback")
+      console.log({ user, account, credentials })
       const isAllowedToSignIn = true
       if (isAllowedToSignIn) {
         return Promise.resolve(true)
@@ -14,19 +15,28 @@ export const authOptions: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
+      console.log(">>>>>>> redirect() callback")
       if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
-    async session({ session, user, token }) {
+    async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       // session.accessToken = token.accessToken
       // session.user.id = token.id
 
+      console.log(">>>>>>> session() callback")
+      console.log({ session, token })
       return session
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
+      console.log(">>>>>>> jwt() callback")
+      console.log({ token, user })
+      if (user) {
+        const auth = (user as any).auth as string[]
+        token.auth = auth
+      }
       return token
     }
   },
@@ -48,9 +58,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
         // console.log(credentials)
+        // TODO Connect with actual DB
         const user = {
-          id: "#",
-          roles: ["admin"],
+          id: credentials?.username || "#",
+          auth: ["admin", "moderator", "user"],
           name: credentials?.username
         }
 
