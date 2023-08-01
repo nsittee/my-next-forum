@@ -1,5 +1,4 @@
 import { withAuth } from 'next-auth/middleware'
-import type { NextRequest, NextResponse } from 'next/server'
 
 const formatTimestamp = (date: Date): string => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` +
@@ -7,34 +6,40 @@ const formatTimestamp = (date: Date): string => {
     `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`
 }
 
-// This function can be marked `async` if using `await` inside
-export const middleware = async (req: NextRequest, res: NextResponse) => {
-  const timestamp = formatTimestamp(new Date())
-  console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}`)
-}
+// This funtion can't be active at the same time as the default export
+// This function can be marked `async` if using`await` inside
+// export const middleware = async (req: NextRequest, res: NextResponse) => {
+//   const timestamp = formatTimestamp(new Date())
+//   console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}`)
+// }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!_next/static|favicon.ico).*)',
+    '/setting'
   ],
 }
 
-export default withAuth({
-  callbacks: {
-    authorized({ req, token }) {
-      console.log("withAuth")
-      console.log(req.nextUrl.pathname)
-      // if (req.nextUrl.pathname === "/setting") {
-      //   return token?.userRole === "admin"
-      // }
-      // `/me` only requires the user to be logged in
-      return true
-    },
+// This is the only middleware
+const withAuthMiddleware = withAuth(
+  // `withAuth` augments your `Request` with the user's token.
+  (req) => {
+    const timestamp = formatTimestamp(new Date())
+    console.log(`${timestamp}|${req.method}|${req.nextUrl.pathname}`)
   },
-})
+  {
+    secret: "secret",
+    callbacks: {
+      authorized({ req, token }) {
+        console.log({ token })
+        if (token) return true // If there is a token, the user is authenticated
+        // if (req.nextUrl.pathname === "/setting") {
+        //   return token?.userRole === "admin"
+        // }
+        // `/me` only requires the user to be logged in
+        return true
+      },
+    },
+  })
+
+export default withAuthMiddleware

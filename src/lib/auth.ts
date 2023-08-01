@@ -23,9 +23,8 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      // session.accessToken = token.accessToken
-      // session.user.id = token.id
-
+      // TODO: Review later
+      (session as any).auth = (token as any).auth;
       console.log(">>>>>>> session() callback")
       console.log({ session, token })
       return session
@@ -57,7 +56,6 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        // console.log(credentials)
         // TODO Connect with actual DB
         const user = {
           id: credentials?.username || "#",
