@@ -66,24 +66,34 @@ export const XHeader = (props: any) => {
                   </>
                   :
                   <>
-                    <label>username: </label>
-                    <input onChange={(e) => setUsername(e.target.value)} />
-                    <br />
-                    <label>password: </label>
-                    <input onChange={(e) => setPassword(e.target.value)} />
-                    <br />
-                    <button
-                      disabled={username === ''}
-                      onClick={() => {
-                        signIn("credentials", {
-                          username: username,
-                          password: password,
-                          redirect: true,
-                          callbackUrl: "/",
-                        })
-                      }}>
-                      sign in
-                    </button>
+                    <form onSubmit={() => {
+                      signIn("credentials", {
+                        username: username,
+                        password: password,
+                        redirect: true,
+                        callbackUrl: "/",
+                      })
+                    }}
+                    >
+                      <label>username: </label>
+                      <input onChange={(e) => setUsername(e.target.value)} />
+                      <br />
+                      <label>password: </label>
+                      <input onChange={(e) => setPassword(e.target.value)} />
+                      <br />
+                      <button
+                        disabled={username === ''}
+                        onClick={() => {
+                          signIn("credentials", {
+                            username: username,
+                            password: password,
+                            redirect: true,
+                            callbackUrl: "/",
+                          })
+                        }}>
+                        sign in
+                      </button>
+                    </form>
                   </>
               }
             </CardContent>
