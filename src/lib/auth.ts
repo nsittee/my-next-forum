@@ -59,7 +59,8 @@ export const authOptions: NextAuthOptions = {
         // TODO Connect with actual DB
         const user = {
           id: credentials?.username || "#",
-          auth: ["admin", "moderator", "user"],
+          auth: ["moderator", "user"],
+          // auth: ["admin", "moderator", "user"],
           name: credentials?.username
         }
 

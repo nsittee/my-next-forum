@@ -20,6 +20,9 @@ export const config = {
   ],
 }
 
+const adminPage = [
+  "/setting",
+]
 // This is the only middleware
 const withAuthMiddleware = withAuth(
   // `withAuth` augments your `Request` with the user's token.
@@ -31,7 +34,14 @@ const withAuthMiddleware = withAuth(
     secret: "secret",
     callbacks: {
       authorized({ req, token }) {
-        console.log({ token })
+        const pathName = req.nextUrl.pathname
+        if (token) {
+          const userAuth = ((token as any).auth) as string[]
+          if (adminPage.includes(pathName)) {
+            return userAuth.includes("admin")
+          }
+        }
+
         if (token) return true // If there is a token, the user is authenticated
         // if (req.nextUrl.pathname === "/setting") {
         //   return token?.userRole === "admin"
