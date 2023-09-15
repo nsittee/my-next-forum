@@ -1,6 +1,6 @@
 import dbConnect from "../config/db-config"
 import { IxSub, Sub } from "../entity/sub-model"
-import { Thread } from "../entity/thread-model"
+import { IxThread, Thread } from "../entity/thread-model"
 
 export const getSubFromId = async (subName: string): Promise<IxSub> => {
   await dbConnect()
@@ -38,4 +38,12 @@ const getAll = async (subId?: string): Promise<any[]> => {
   return Promise.resolve(list)
 }
 
-export const threadService = { getAll, getSubFromId }
+const getThreadFromId = async (threadId: string): Promise<IxThread> => {
+  const searchThread = await Thread.findById(threadId)
+    .populate('Author', 'Username')
+    .exec()
+
+  return Promise.resolve(searchThread)
+}
+
+export const threadService = { getAll, getSubFromId, getThreadFromId }
